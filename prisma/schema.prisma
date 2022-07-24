@@ -1,0 +1,17 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+  referentialIntegrity = "prisma"
+}
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
+}
+
+model User {
+  id              Int       @default(autoincrement()) @id
+  token           String    @unique
+  createdAt       DateTime  @default(now())
+  name            String    @db.VarChar(100)
+}
