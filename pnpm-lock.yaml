@@ -7,6 +7,7 @@ specifiers:
   '@types/node': 18.0.6
   '@types/react': 18.0.15
   '@types/react-dom': 18.0.6
+  '@types/uuid': ^8.3.4
   eslint: 8.20.0
   eslint-config-next: 12.2.3
   lodash: ^4.17.21
@@ -17,6 +18,7 @@ specifiers:
   ts-node: ^10.9.1
   tslib: ^2.4.0
   typescript: 4.7.4
+  uuid: ^8.3.2
 
 dependencies:
   '@prisma/client': 4.1.0_prisma@4.1.0
@@ -25,6 +27,7 @@ dependencies:
   prisma: 4.1.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
+  uuid: 8.3.2
 
 devDependencies:
   '@types/glob': 7.2.0
@@ -32,6 +35,7 @@ devDependencies:
   '@types/node': 18.0.6
   '@types/react': 18.0.15
   '@types/react-dom': 18.0.6
+  '@types/uuid': 8.3.4
   eslint: 8.20.0
   eslint-config-next: 12.2.3_he2ccbldppg44uulnyq4rwocfa
   ts-node: 10.9.1_tdn3ypgnfy6bmey2q4hu5jonwi
@@ -350,6 +354,10 @@ packages:
 
   /@types/scheduler/0.16.2:
     resolution: {integrity: sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew==}
+    dev: true
+
+  /@types/uuid/8.3.4:
+    resolution: {integrity: sha512-c/I8ZRb51j+pYGAu5CrFMRxqZ2ke4y2grEBO5AUjgSkSk+qT2Ea+OdWElz/OiMf5MNpn2b17kuVBwZLQJXzihw==}
     dev: true
 
   /@typescript-eslint/parser/5.30.7_he2ccbldppg44uulnyq4rwocfa:
@@ -1985,6 +1993,11 @@ packages:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
       react: 18.2.0
+    dev: false
+
+  /uuid/8.3.2:
+    resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
+    hasBin: true
     dev: false
 
   /v8-compile-cache-lib/3.0.1:

@@ -14,7 +14,8 @@
     "next": "12.2.3",
     "prisma": "^4.1.0",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@types/glob": "^7.2.0",
@@ -22,6 +23,7 @@
     "@types/node": "18.0.6",
     "@types/react": "18.0.15",
     "@types/react-dom": "18.0.6",
+    "@types/uuid": "^8.3.4",
     "eslint": "8.20.0",
     "eslint-config-next": "12.2.3",
     "ts-node": "^10.9.1",
