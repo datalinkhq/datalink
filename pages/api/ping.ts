@@ -13,7 +13,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  const query = req.query;
+  const query = req.body;
   const { id, token } = query;
   if (token && id) {
     if (await validateToken(toNumber(id), token.toString()) === true) {
