@@ -25,6 +25,7 @@ export default async function handler(
       await prisma.user.update({
         where: {
           id: toNumber(id),
+          sessionKey: 'null',
           token: token.toString()
         },
         data: {
