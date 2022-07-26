@@ -2,7 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import fetchtoken from '../../../lib/fetchToken'
 import validateToken from '../../../lib/validateSession'
-import { toNumber } from 'lodash'
+import { toNumber, toInteger } from 'lodash'
 import prisma from '../../../lib/prisma'
 
 type Data = {
@@ -18,13 +18,13 @@ export default async function handler(
         const body = req.body;
         const { id, token, DateISO, ServerID, PlaceID, Packet, } = body
         const headers = req.headers
-        // TODO: Get PlaceID from headers
+        const placeId = headers['Roblox-Id']
         if (id && token && DateISO && ServerID && PlaceID && Packet.EventID && Packet.EventName, Packet.PurchaseID) {
             if (await validateToken(toNumber(id), token.toString()) === true) {
                 try {
                     await prisma.analytics.create({
                         data: {
-                            PlaceID: BigInt(PlaceID),
+                            PlaceID: BigInt(toInteger(placeId)),
                             PurchaseID:Packet.PurchaseID,
                             EventID: Packet.EventID,
                             ServerID: BigInt(ServerID),
