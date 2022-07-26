@@ -16,21 +16,23 @@ export default async function handler(
 ) {
     if (req.method === 'POST') {
         const body = req.body;
-        const { id, token, DateISO, ServerID, Packet, } = body
-        if (id && token && DateISO && ServerID && Packet.EventID && Packet.EventName) {
+        const { id, token, DateISO, ServerID, PlaceID, Packet, } = body
+        const headers = req.headers
+        // TODO: Get PlaceID from headers
+        if (id && token && DateISO && ServerID && PlaceID && Packet.EventID && Packet.EventName, Packet.PurchaseID) {
             if (await validateToken(toNumber(id), token.toString()) === true) {
                 try {
-                    await prisma.analytics.update({
-                        where: {
-                            EventID: Packet.EventID
-                        },
+                    await prisma.analytics.create({
                         data: {
+                            PlaceID: BigInt(PlaceID),
+                            PurchaseID:Packet.PurchaseID,
+                            EventID: Packet.EventID,
                             ServerID: BigInt(ServerID),
                             EventName: Packet.EventName
                         }
                     })
                     res.status(200).json({ code: 200, status: `success` })
-                    console.log(`Updated event: ${Packet.EventName} with ID: ${Packet.EventID}.`)
+                    console.log(`Created event: ${Packet.EventName} with ID: ${Packet.EventID}.`)
 
                 } catch (e) {
                     console.log(e)
@@ -40,7 +42,7 @@ export default async function handler(
                 res.status(401).json({ code: 401, status: `unauthorized` })
             }
         } else {
-            res.status(400).json({ code: 400, status: 'invalid request type' })
+            res.status(400).json({ code: 400, status: 'Bad Request' })
         }
     }
 }

@@ -10,12 +10,13 @@ async function give(name: string) {
         await prisma.user.create({
             data: {
                 token: token,
-                name: name
+                name: name,
+                sessionKey: 'null'
             }
         })
 
         console.log(`Created user: ${name} with token: ${token}.`)
-        return `Created user: ${name} with token: ${token}.`
+        return token
 
     } catch (e) {
 

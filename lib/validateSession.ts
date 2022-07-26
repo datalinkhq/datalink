@@ -1,5 +1,5 @@
 import { validate as uuidValidate } from 'uuid';
-import fetchtoken from './fetchToken'
+import fetchtoken from './fetchSession';
 
 export default async function validateToken(id: number, token: string): Promise<any> {
     if (uuidValidate(token) == true) {
