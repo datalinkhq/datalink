@@ -1,0 +1,88 @@
+.home {
+    display: flex;
+    justify-content: space-between;
+    padding: 3rem 15rem 3rem 3rem;
+}
+
+.home .left {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    max-width: 700px;
+}
+
+.home .left .info {
+    margin-top: 2rem;
+}
+
+.home .left .info h1 {
+    font-size: 1.5rem;
+    font-family: var(--font-syne);
+    margin-bottom: .5rem;
+}
+
+.home .left .info p {
+    font-family: var(--font-inter);
+    opacity: .7;
+}
+.home .right {
+    position: relative;
+}
+
+.home .right::before {
+    position: absolute;
+    content: "";
+    width: 2px;
+    height: 100vh;
+    left: -5%;
+    right: 100%;
+    top: 0;
+    bottom: 0;
+    background-color: var(--black);
+}
+
+.home .right h3 {
+    font-weight: 100;
+    font-size: 1.5rem;
+    font-family: var(--font-syne);
+}
+
+.home .right h1:not(.subtitle) {
+    font-size: 3.5rem;
+    max-width: 800px;
+    font-family: var(--font-source-sans-pro);
+}
+
+.home .right .buttons {
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.home .right .buttons a {
+    position: relative;
+}
+
+.home .right .buttons a span {
+    margin-right: 1rem;
+    transition: .4s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.home .right .buttons a::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: var(--black);
+    top: 130%;
+    bottom: 0;
+    left: 0%;
+    right: 0;
+    z-index: -1;
+}
+
+.home .right .buttons a:hover span {
+    margin-right: 2rem;
+}
