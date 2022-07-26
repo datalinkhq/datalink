@@ -1,7 +1,11 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
 import fetchtoken from '../../../lib/fetchToken'
+<<<<<<< HEAD:src/pages/api/events/update.ts
 import validateToken from '../../../lib/validateToken'
+=======
+import validateToken from '../../../lib/validateSession'
+>>>>>>> d3cd1a333c5976b523f9751785fabeab685b5eed:pages/api/events/update.ts
 import { toNumber } from 'lodash'
 import prisma from '../../../lib/prisma'
 
@@ -43,4 +47,8 @@ export default async function handler(
             res.status(400).json({ code: 400, status: 'invalid request type' })
         }
     }
+<<<<<<< HEAD:src/pages/api/events/update.ts
 }
+=======
+}
+>>>>>>> d3cd1a333c5976b523f9751785fabeab685b5eed:pages/api/events/update.ts

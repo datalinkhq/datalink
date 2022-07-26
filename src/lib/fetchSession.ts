@@ -7,7 +7,6 @@ async function get(id: Number, debug?: Boolean) {
             id: toNumber(id)
         }
     })
-
     if (data) {
         return data.sessionKey
     } else if (!data) {

@@ -25,7 +25,11 @@ export default async function handler(
         }
     })
     if (name) {
+<<<<<<< HEAD:src/pages/api/create.ts
         try {
+=======
+        try {          
+>>>>>>> d3cd1a333c5976b523f9751785fabeab685b5eed:pages/api/create.ts
             res.status(200).json({ code: 200, status: `success`, id: toNumber(data?.id), token: `${data?.token}` })
         } catch (e) {
             res.status(500).json({ code: 500, status: `error` })
