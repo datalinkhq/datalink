@@ -13,9 +13,9 @@ export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse<Data>
 ) {
-    const query = req.query;
-    const { id, name, token } = query;
-    if (name) {
+    const body = req.body;
+    const { id, name } = body;
+    if (name && id) {
         try {
             await setToken(name.toString())
             res.status(200).json({ code: 200, status: `success` })

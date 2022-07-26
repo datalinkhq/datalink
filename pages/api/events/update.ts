@@ -30,7 +30,7 @@ export default async function handler(
                         }
                     })
                     res.status(200).json({ code: 200, status: `success` })
-                    console.log(`Created event: ${Packet.EventName} with ID: ${Packet.EventID}.`)
+                    console.log(`Updated event: ${Packet.EventName} with ID: ${Packet.EventID}.`)
 
                 } catch (e) {
                     console.log(e)
@@ -40,7 +40,7 @@ export default async function handler(
                 res.status(401).json({ code: 401, status: `unauthorized` })
             }
         } else {
-            res.status(400).json({ code: 400, status: 'Bad Request' })
+            res.status(400).json({ code: 400, status: 'invalid request type' })
         }
     }
 }
