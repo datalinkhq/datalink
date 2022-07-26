@@ -25,8 +25,6 @@ export default async function handler(
       await prisma.user.update({
         where: {
           id: toNumber(id),
-          sessionKey: 'null',
-          token: token.toString()
         },
         data: {
           sessionKey: session_key.toString()
@@ -36,7 +34,6 @@ export default async function handler(
       session_key = await prisma.user.findUnique({
         where: {
           id: toNumber(id),
-          token: token.toString()
         }
       })
       res.status(200).json({ code: 200, status: `success`, session_key: session_key.sessionKey })

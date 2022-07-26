@@ -15,14 +15,13 @@ export default async function handler(
   res: NextApiResponse<Data>
 ) {
   const query = req.body;
-  const { id, token } = query;
-  if (token && id) {
+  const { id, token, session_key } = query;
+  if (token && id && session_key) {
     if (await validateToken(toNumber(id), token.toString()) === true) {
 
       await prisma.user.update({
         where: {
-          id: toNumber(id),
-          sessionKey: token.toString()
+          sessionKey: session_key.toString()
         },
         data: {
           sessionKey: 'null'
