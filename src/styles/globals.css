@@ -35,9 +35,9 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  background-color: var(--black);
+  background-color: var(--white);
   font-size: var(--font-rubik);
-  color: var(--white)
+  color: var(--black)
 }
 
 a {
@@ -47,4 +47,10 @@ a {
 
 body {
   overflow: hidden;
+}
+
+@media screen and (max-width: 1838px) {
+    body {
+      overflow: auto;
+    }
 }

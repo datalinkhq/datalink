@@ -103,6 +103,13 @@
   padding: .5rem;
   border-radius: 5px;
   transition: .6s cubic-bezier(0.075, 0.82, 0.165, 1);
+  z-index: 999;
+}
+.burger  .component .complist,
+.burger  .component .complist ul,
+.burger  .component .complist ul li a {
+  background-color: var(--black);
+  color: var(--white);
 }
 
 .burger  .component .complist ul  {
