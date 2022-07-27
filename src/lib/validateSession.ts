@@ -10,5 +10,4 @@ export default async function validateToken(id: number, token: string): Promise<
             return true
         }
     }
-
 }

@@ -4,11 +4,7 @@ import fetchtoken from '../../../lib/fetchToken'
 import validateToken from '../../../lib/validateSession'
 import { toNumber, toInteger } from 'lodash'
 import prisma from '../../../lib/prisma'
-
-type Data = {
-    code: Number
-    status: String
-}
+import { Data } from '../../../lib/types/types'
 
 export default async function handler(
     req: NextApiRequest,
@@ -25,11 +21,7 @@ export default async function handler(
                     await prisma.analytics.create({
                         data: {
                             PlaceID: BigInt(toInteger(placeId)),
-<<<<<<< HEAD:src/pages/api/events/publish.ts
-                            PurchaseID: Packet.PurchaseID,
-=======
                             PurchaseID:Packet.PurchaseID,
->>>>>>> d3cd1a333c5976b523f9751785fabeab685b5eed:pages/api/events/publish.ts
                             EventID: Packet.EventID,
                             ServerID: BigInt(ServerID),
                             EventName: Packet.EventName
@@ -48,9 +40,7 @@ export default async function handler(
         } else {
             res.status(400).json({ code: 400, status: 'Bad Request' })
         }
+    } else {
+        res.status(400).json({ code: 400, status:'Invalid Request Method' })
     }
-<<<<<<< HEAD:src/pages/api/events/publish.ts
 }
-=======
-}
->>>>>>> d3cd1a333c5976b523f9751785fabeab685b5eed:pages/api/events/publish.ts

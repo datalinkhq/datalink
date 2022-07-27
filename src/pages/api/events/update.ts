@@ -1,18 +1,10 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
 import fetchtoken from '../../../lib/fetchToken'
-<<<<<<< HEAD:src/pages/api/events/update.ts
-import validateToken from '../../../lib/validateToken'
-=======
 import validateToken from '../../../lib/validateSession'
->>>>>>> d3cd1a333c5976b523f9751785fabeab685b5eed:pages/api/events/update.ts
 import { toNumber } from 'lodash'
 import prisma from '../../../lib/prisma'
-
-type Data = {
-    code: Number
-    status: String
-}
+import { Data } from '../../../lib/types/types'
 
 export default async function handler(
     req: NextApiRequest,
@@ -20,7 +12,10 @@ export default async function handler(
 ) {
     if (req.method === 'POST') {
         const body = req.body;
+        const headers = req.headers
+        const UserAgent = headers['User-Agent']
         const { id, token, DateISO, ServerID, Packet, } = body
+        // TODO: Check if user agent is from roblox httpservice
         if (id && token && DateISO && ServerID && Packet.EventID && Packet.EventName) {
             if (await validateToken(toNumber(id), token.toString()) === true) {
                 try {
@@ -47,8 +42,4 @@ export default async function handler(
             res.status(400).json({ code: 400, status: 'invalid request type' })
         }
     }
-<<<<<<< HEAD:src/pages/api/events/update.ts
 }
-=======
-}
->>>>>>> d3cd1a333c5976b523f9751785fabeab685b5eed:pages/api/events/update.ts

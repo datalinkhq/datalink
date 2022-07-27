@@ -7,11 +7,12 @@ async function get(id: Number, debug?: Boolean) {
             id: toNumber(id)
         }
     })
+    
     if (data) {
         return data.sessionKey
     } else if (!data) {
         if (!debug) {
-            return 'No token found for this user!'
+        return 'No token found for this user!'
         } else if (debug === true) {
             return null
         }

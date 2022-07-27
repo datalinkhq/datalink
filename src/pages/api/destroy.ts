@@ -4,11 +4,7 @@ import fetchtoken from '../../lib/fetchToken'
 import validateToken from '../../lib/validateToken'
 import prisma from '../../lib/prisma'
 import { toNumber } from 'lodash'
-
-type Data = {
-  code: Number
-  status: String
-}
+import { Data } from '../../lib/types/types'
 
 export default async function handler(
   req: NextApiRequest,
