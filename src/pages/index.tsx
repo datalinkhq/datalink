@@ -34,19 +34,15 @@ const Home: NextPage = () => {
         </h1>
 
         <div className={styles.buttons}>
-          <a href="/">
-            <span>Get Started</span>
-            <i className="ri-arrow-right-up-line"></i>
-          </a>
           <Link href="/">
             <a>
-              <span>Pricing</span>
+              <span>Get Started</span>
               <i className="ri-arrow-right-up-line"></i>
             </a>
           </Link>
           <Link href="/">
             <a>
-              <span>Get Started</span>
+              <span>Pricing</span>
               <i className="ri-arrow-right-up-line"></i>
             </a>
           </Link>
