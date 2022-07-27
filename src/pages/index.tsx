@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import Link from "next/link"
 import type { NextPage } from "next";
 import DashboardExample from "../components/DashboardExample";
 import styles from "../styles/pages/home.module.css";
@@ -14,15 +14,15 @@ const Home: NextPage = () => {
           </p>
         </div>
         <div className={styles.info}>
-          <h1>Customizability to it's max.</h1>
+          <h1>Customizability to it&#39;s max.</h1>
           <p>
-            Want something that isn't supported already? Want to add your own custom feature? Datalink supports it.
+            Want something that isn&#39;t supported already? Want to add your own custom feature? Datalink supports it.
           </p>
         </div>
         <div className={styles.info}>
           <h1>Easy to implement.</h1>
           <p>
-            Simply add a module script to your game, and set your token, you're good to go!
+            Simply add a module script to your game, and set your token, you&#39;re good to go!
           </p>
         </div>
       </div>
