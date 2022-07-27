@@ -10,11 +10,12 @@ generator client {
 }
 
 model User {
-  id         Int      @id @default(autoincrement())
-  sessionKey String   @unique
-  token      String   @unique
-  createdAt  DateTime @default(now())
-  name       String   @db.VarChar(100)
+  id          Int      @id @default(autoincrement())
+  sessionKey  String   @unique
+  sessionTime String   @db.VarChar(255)
+  token       String   @unique
+  createdAt   DateTime @default(now())
+  name        String   @db.VarChar(100)
 }
 
 model Analytics {

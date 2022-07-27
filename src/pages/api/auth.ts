@@ -22,7 +22,8 @@ export default async function handler(
           id: toNumber(id),
         },
         data: {
-          sessionKey: session_key.toString()
+          sessionKey: session_key.toString(),
+          sessionTime: Math.floor((new Date()).getTime() / 1000).toString()
         }
       })
 
@@ -31,9 +32,9 @@ export default async function handler(
           id: toNumber(id),
         }
       })
-      res.status(200).json({ code: 200, status: `success`, session_key: session_key.sessionKey })
+      res.status(200).json({ code: 200, status: `Success`, session_key: session_key.sessionKey })
     } else {
-      res.status(401).json({ code: 401, status: `unauthorized` })
+      res.status(401).json({ code: 401, status: `Unauthorized` })
     }
   } else {
     res.status(400).json({ code: 400, status: 'Bad Request' })

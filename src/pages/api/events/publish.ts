@@ -32,15 +32,15 @@ export default async function handler(
 
                 } catch (e) {
                     console.log(e)
-                    res.status(500).json({ code: 500, status: `error` })
+                    res.status(500).json({ code: 500, status: `Error` })
                 }
             } else {
-                res.status(401).json({ code: 401, status: `unauthorized` })
+                res.status(401).json({ code: 401, status: `Unauthorized` })
             }
         } else {
             res.status(400).json({ code: 400, status: 'Bad Request' })
         }
     } else {
-        res.status(400).json({ code: 400, status:'Invalid Request Method' })
+        res.status(405).json({ code: 400, status:'Method Not Allowed' })
     }
 }

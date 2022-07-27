@@ -28,18 +28,18 @@ export default async function handler(
                             EventName: Packet.EventName
                         }
                     })
-                    res.status(200).json({ code: 200, status: `success` })
+                    res.status(200).json({ code: 200, status: `Success` })
                     console.log(`Updated event: ${Packet.EventName} with ID: ${Packet.EventID}.`)
 
                 } catch (e) {
                     console.log(e)
-                    res.status(500).json({ code: 500, status: `error` })
+                    res.status(500).json({ code: 500, status: `Error` })
                 }
             } else {
-                res.status(401).json({ code: 401, status: `unauthorized` })
+                res.status(401).json({ code: 401, status: `Uauthorized` })
             }
         } else {
-            res.status(400).json({ code: 400, status: 'invalid request type' })
+            res.status(405).json({ code: 400, status: 'Method Not Allowed' })
         }
     }
 }
