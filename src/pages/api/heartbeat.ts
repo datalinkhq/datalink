@@ -2,7 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import fetchtoken from '../../lib/fetchToken'
 import { v4 as uuidv4 } from 'uuid';
-import validateToken from '../../lib/validateToken'
+import validateToken from '../../lib/validateSession'
 import prisma from '../../lib/prisma'
 import { toNumber } from 'lodash'
 import { Data } from '../../lib/types/types'
