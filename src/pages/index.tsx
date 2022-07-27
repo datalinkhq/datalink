@@ -10,19 +10,19 @@ const Home: NextPage = () => {
         <div className={styles.info}>
           <h1>Keep track of everything.</h1>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci
-            delectus enim porro modi repudiandae dolores commodi repellat! Illum
-            quis, dolorum ea nostrum consequuntur fugiat distinctio quisquam
-            tenetur ratione? Vitae, magni?
+            Everything from simple player statistics, to custom events and feature flags. All in one place.
+          </p>
+        </div>
+        <div className={styles.info}>
+          <h1>Customizability to it's max.</h1>
+          <p>
+            Want something that isn't supported already? Want to add your own custom feature? Datalink supports it.
           </p>
         </div>
         <div className={styles.info}>
           <h1>Easy to implement.</h1>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci
-            delectus enim porro modi repudiandae dolores commodi repellat! Illum
-            quis, dolorum ea nostrum consequuntur fugiat distinctio quisquam
-            tenetur ratione? Vitae, magni?
+            Simply add a module script to your game, and set your token, you're good to go!
           </p>
         </div>
       </div>

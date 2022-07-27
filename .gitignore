@@ -34,9 +34,4 @@ yarn-error.log*
 .next
 
 # typescript
-<<<<<<< HEAD
 *.tsbuildinfo
-=======
-*.tsbuildinfo
-
->>>>>>> d3cd1a333c5976b523f9751785fabeab685b5eed
