@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Link from "next/link";
 import styles from "./styles.module.css";
 
 export default function Navbar() {
@@ -7,10 +8,14 @@ export default function Navbar() {
     return (
       <ul>
         <li>
-          <a href="/">Pricing</a>
+          <Link href="/">
+            <a>Pricing</a>
+          </Link>
         </li>
         <li>
-          <a href="/">About us</a>
+          <Link href="/">
+            <a>About Us</a>
+          </Link>
         </li>
       </ul>
     );

@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import type { NextPage } from "next";
 import DashboardExample from "../components/DashboardExample";
 import styles from "../styles/pages/home.module.css";
@@ -37,10 +38,18 @@ const Home: NextPage = () => {
             <span>Get Started</span>
             <i className="ri-arrow-right-up-line"></i>
           </a>
-          <a href="/">
-            <span>Pricing</span>
-            <i className="ri-arrow-right-up-line"></i>
-          </a>
+          <Link href="/">
+            <a>
+              <span>Pricing</span>
+              <i className="ri-arrow-right-up-line"></i>
+            </a>
+          </Link>
+          <Link href="/">
+            <a>
+              <span>Get Started</span>
+              <i className="ri-arrow-right-up-line"></i>
+            </a>
+          </Link>
         </div>
       </div>
     </div>
