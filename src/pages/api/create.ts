@@ -20,9 +20,9 @@ export default async function handler(
     })
     if (name) {
         try {          
-            res.status(200).json({ code: 200, status: `success`, id: toNumber(data?.id), token: `${data?.token}` })
+            res.status(200).json({ code: 200, status: `Success`, id: toNumber(data?.id), token: `${data?.token}` })
         } catch (e) {
-            res.status(500).json({ code: 500, status: `error` })
+            res.status(500).json({ code: 500, status: `Error` })
         }
     } else {
         res.status(400).json({ code: 400, status: 'Bad Request' })
