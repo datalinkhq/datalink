@@ -26,7 +26,7 @@ export default async function validateToken(id: number, token: string): Promise<
         }
     })
     if (checkTime(toNumber(toNumber(data?.sessionTime))) === false) {
-        if (uuidValidate(token) == true) {
+        if (uuidValidate(token) == true) { 
             const exists = await fetchtoken(id, true)
             if (exists == null) {
                 return false
