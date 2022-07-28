@@ -15,7 +15,7 @@ export default async function handler(
         const { id, token, DateISO, ServerID, PlaceID, Packet, } = body
         const headers = req.headers
         const placeId = headers['Roblox-Id']
-        if (id && token && DateISO && ServerID && Packet.EventID && Packet.EventName, Packet.PurchaseID) {
+        if (id && token && DateISO && ServerID && Packet.EventID && Packet.EventName) {
             if (await validateToken(toNumber(id), token.toString()) === true) {
                 try {
                     await prisma.analytics.create({
