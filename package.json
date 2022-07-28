@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "pnpm prisma generate && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "export": "next export"
   },
   "dependencies": {
     "@prisma/client": "^4.1.0",
