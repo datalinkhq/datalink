@@ -21,7 +21,6 @@ export default async function handler(
                     await prisma.analytics.create({
                         data: {
                             PlaceID: BigInt(toInteger(placeId)),
-                            PurchaseID:Packet.PurchaseID,
                             EventID: Packet.EventID,
                             ServerID: BigInt(ServerID),
                             EventName: Packet.EventName
