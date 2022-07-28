@@ -22,11 +22,11 @@ const checkTime = (time: number) => {
 export default async function validateToken(id: number, token: string): Promise<any> {
     let data = await prisma.user.findUnique({
         where: {
-            id: toNumber(2)
+            id: toNumber(id)
         }
     })
     if (checkTime(toNumber(toNumber(data?.sessionTime))) === false) {
-        if (uuidValidate(token) == true) {
+        if (uuidValidate(token) == true) { 
             const exists = await fetchtoken(id, true)
             if (exists == null) {
                 return false

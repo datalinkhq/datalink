@@ -24,5 +24,4 @@ model Analytics {
   EventName  String   @db.VarChar(100)
   ServerID   BigInt   @db.BigInt
   PlaceID    BigInt   @db.BigInt
-  PurchaseID BigInt   @db.BigInt
 }
