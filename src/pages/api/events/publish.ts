@@ -13,7 +13,7 @@ const handler = async function handler(
 ) {
     if (req.method === 'POST') {
         const body = req.body;
-        const { id, token, DateISO, ServerID, PlaceID, Packet, } = body
+        const { id, token, DateISO, ServerID, Packet, } = body
         const headers = req.headers
         const placeId = headers['Roblox-Id']
         if (id && token && DateISO && ServerID && Packet.EventID && Packet.EventName) {
