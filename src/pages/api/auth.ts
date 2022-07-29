@@ -6,8 +6,9 @@ import validateToken from '../../lib/validateToken'
 import prisma from '../../lib/prisma'
 import { toNumber } from 'lodash'
 import { Data } from '../../lib/types/types'
+import { withSentry } from '@sentry/nextjs';
 
-export default async function handler(
+const handler = async function handler (
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
@@ -40,3 +41,5 @@ export default async function handler(
     res.status(400).json({ code: 400, status: 'Bad Request' })
   }
 }
+
+export default withSentry(handler);

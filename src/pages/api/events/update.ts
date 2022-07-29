@@ -5,8 +5,9 @@ import validateToken from '../../../lib/validateSession'
 import { toNumber, toInteger } from 'lodash'
 import prisma from '../../../lib/prisma'
 import { Data } from '../../../lib/types/types'
+import { withSentry } from '@sentry/nextjs'
 
-export default async function handler(
+const handler = async function handler(
     req: NextApiRequest,
     res: NextApiResponse<Data>
 ) {
@@ -45,3 +46,5 @@ export default async function handler(
         res.status(405).json({ code: 400, status:'Method Not Allowed' })
     }
 }
+
+export default withSentry(handler)
