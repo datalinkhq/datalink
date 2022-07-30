@@ -18,7 +18,6 @@ const checkTime = (time: number) => {
 }
 // TODO: check if sessionkey has expired
 
-
 export default async function validateToken(id: number, token: string): Promise<any> {
     let data = await prisma.user.findUnique({
         where: {

@@ -19,9 +19,9 @@ model User {
 }
 
 model Analytics {
-  EventID    String   @id
-  DateISO    DateTime @updatedAt
-  EventName  String   @db.VarChar(100)
-  ServerID   BigInt   @db.BigInt
-  PlaceID    BigInt   @db.BigInt
+  EventID   String   @id @unique
+  DateISO   DateTime @updatedAt
+  EventName String   @db.VarChar(100)
+  ServerID  BigInt   @db.BigInt
+  PlaceID   BigInt   @db.BigInt
 }

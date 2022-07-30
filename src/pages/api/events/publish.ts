@@ -5,29 +5,37 @@ import validateToken from '../../../lib/validateSession'
 import { toNumber, toInteger } from 'lodash'
 import prisma from '../../../lib/prisma'
 import { Data } from '../../../lib/types/types'
+import { withSentry } from '@sentry/nextjs'
+import { v4 as uuidv4 } from 'uuid';
 
-export default async function handler(
+const handler = async function handler(
     req: NextApiRequest,
     res: NextApiResponse<Data>
 ) {
     if (req.method === 'POST') {
+        const EventID = uuidv4()
         const body = req.body;
-        const { id, token, DateISO, ServerID, PlaceID, Packet, } = body
+        const { id, token, DateISO, ServerID, Packet, } = body
         const headers = req.headers
         const placeId = headers['Roblox-Id']
-        if (id && token && DateISO && ServerID && Packet.EventID && Packet.EventName) {
+        if (id && token && DateISO && ServerID && Packet.EventName) {
             if (await validateToken(toNumber(id), token.toString()) === true) {
                 try {
-                    await prisma.analytics.create({
+                    await prisma.analytics.create({     
                         data: {
-                            PlaceID: BigInt(toInteger(placeId)),
-                            EventID: Packet.EventID,
+                            PlaceID: toInteger(placeId),
                             ServerID: BigInt(ServerID),
-                            EventName: Packet.EventName
+                            EventID: EventID,
+                            EventName: Packet.EventName.toString()
                         }
                     })
-                    res.status(200).json({ code: 200, status: `success` })
-                    console.log(`Created event: ${Packet.EventName} with ID: ${Packet.EventID}.`)
+                    let data = await prisma.analytics.findUnique({
+                        where: {
+                            EventID: EventID
+                        }
+                    })
+                    res.status(200).json({ code: 200, status: `success`, EventID: data?.EventID })
+                    console.log(`Created event: ${Packet.EventName} with ID: ${data?.EventID}.`)
 
                 } catch (e) {
                     console.log(e)
@@ -43,3 +51,5 @@ export default async function handler(
         res.status(405).json({ code: 400, status:'Method Not Allowed' })
     }
 }
+
+export default withSentry(handler)
