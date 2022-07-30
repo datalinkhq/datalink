@@ -16,19 +16,23 @@ const handler = async function handler(
         const { id, token, DateISO, ServerID, Packet, } = body
         const headers = req.headers
         const placeId = headers['Roblox-Id']
-        if (id && token && DateISO && ServerID && Packet.EventID && Packet.EventName) {
+        if (id && token && DateISO && ServerID && Packet.EventName) {
             if (await validateToken(toNumber(id), token.toString()) === true) {
                 try {
                     await prisma.analytics.create({     
                         data: {
-                            PlaceID: BigInt(toInteger(placeId)),
-                            EventID: Packet.EventID,
+                            PlaceID: toInteger(placeId),
                             ServerID: BigInt(ServerID),
                             EventName: Packet.EventName
                         }
                     })
-                    res.status(200).json({ code: 200, status: `success` })
-                    console.log(`Created event: ${Packet.EventName} with ID: ${Packet.EventID}.`)
+                    let data = await prisma.user.findUnique({
+                        where: {
+                            EventName: Packet.EventName
+                        }
+                    })
+                    res.status(200).json({ code: 200, status: `success`, EventID: data?.EventID })
+                    console.log(`Created event: ${Packet.EventName} with ID: ${data.EventID}.`)
 
                 } catch (e) {
                     console.log(e)
