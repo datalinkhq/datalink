@@ -19,7 +19,7 @@ const handler = async function handler(
         if (id && token && DateISO && ServerID && Packet.EventID && Packet.EventName) {
             if (await validateToken(toNumber(id), token.toString()) === true) {
                 try {
-                    await prisma.analytics.create({
+                    await prisma.analytics.create({     
                         data: {
                             PlaceID: BigInt(toInteger(placeId)),
                             EventID: Packet.EventID,
