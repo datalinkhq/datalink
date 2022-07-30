@@ -4,5 +4,5 @@ export type Data = {
     id?: Number
     token?: String
     session_key?: String
-    EventID?: Number
+    EventID?: String
 }

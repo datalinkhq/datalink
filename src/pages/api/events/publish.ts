@@ -6,12 +6,14 @@ import { toNumber, toInteger } from 'lodash'
 import prisma from '../../../lib/prisma'
 import { Data } from '../../../lib/types/types'
 import { withSentry } from '@sentry/nextjs'
+import { v4 as uuidv4 } from 'uuid';
 
 const handler = async function handler(
     req: NextApiRequest,
     res: NextApiResponse<Data>
 ) {
     if (req.method === 'POST') {
+        const EventID = uuidv4()
         const body = req.body;
         const { id, token, DateISO, ServerID, Packet, } = body
         const headers = req.headers
@@ -23,16 +25,17 @@ const handler = async function handler(
                         data: {
                             PlaceID: toInteger(placeId),
                             ServerID: BigInt(ServerID),
+                            EventID: EventID,
                             EventName: Packet.EventName.toString()
                         }
                     })
-                    let data = await prisma.user.findUnique({
+                    let data = await prisma.analytics.findUnique({
                         where: {
-                            EventName: Packet.EventName.toString()
+                            EventID: EventID
                         }
                     })
                     res.status(200).json({ code: 200, status: `success`, EventID: data?.EventID })
-                    console.log(`Created event: ${Packet.EventName} with ID: ${data.EventID}.`)
+                    console.log(`Created event: ${Packet.EventName} with ID: ${data?.EventID}.`)
 
                 } catch (e) {
                     console.log(e)
