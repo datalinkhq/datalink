@@ -23,12 +23,12 @@ const handler = async function handler(
                         data: {
                             PlaceID: toInteger(placeId),
                             ServerID: BigInt(ServerID),
-                            EventName: Packet.EventName
+                            EventName: Packet.EventName.toString()
                         }
                     })
                     let data = await prisma.user.findUnique({
                         where: {
-                            EventName: Packet.EventName
+                            EventName: Packet.EventName.toString()
                         }
                     })
                     res.status(200).json({ code: 200, status: `success`, EventID: data?.EventID })
