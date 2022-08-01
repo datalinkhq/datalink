@@ -12,6 +12,6 @@ if (process.env.NODE_ENV === "production") {
     globalWithPrisma.prisma = new PrismaClient();
   }
   prisma = globalWithPrisma.prisma;
-} // add development mode?
+} // TODO: add development mode?
 
 export default prisma;

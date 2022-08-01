@@ -6,3 +6,14 @@ export type Data = {
     session_key?: String
     EventID?: String
 }
+
+export type Log = {
+    [
+    id: Number,
+    code: Number,
+    status: String,
+    type?: String,
+    trace?: String,
+    message?: String
+    ]: Array
+}

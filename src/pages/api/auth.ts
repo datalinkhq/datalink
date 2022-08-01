@@ -15,8 +15,8 @@ const handler = async function handler (
   const query = req.body;
   const { id, token } = query;
   if (token && id) {
-    if (await validateToken(toNumber(id), token.toString()) === true) {
-      let session_key: any = uuidv4(); // TODO: Invalidate token after set time
+    if (await validateToken(toNumber(id), token.toString()) === true) { 
+      let session_key: any = uuidv4();
 
       await prisma.user.update({
         where: {

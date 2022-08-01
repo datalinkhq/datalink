@@ -25,3 +25,11 @@ model Analytics {
   ServerID  BigInt   @db.BigInt
   PlaceID   BigInt   @db.BigInt
 }
+
+model Log {
+  id      Int    @id @default(autoincrement())
+  assocId Int    @db.Int
+  type    String @db.VarChar(100)
+  trace   String @db.VarChar(100)
+  message String @db.VarChar(100)
+}
