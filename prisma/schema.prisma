@@ -11,8 +11,8 @@ generator client {
 
 model User {
   id          Int      @id @default(autoincrement())
-  sessionKey  String   @unique
-  sessionTime String   @db.VarChar(255)
+  sessionKey  String?  @unique
+  sessionTime String?  @db.VarChar(255)
   token       String   @unique
   createdAt   DateTime @default(now())
   name        String   @db.VarChar(100)
@@ -32,4 +32,15 @@ model Log {
   type    String @db.VarChar(100)
   trace   String @db.VarChar(100)
   message String @db.VarChar(100)
+}
+
+model Player {
+  accountId      BigInt  @id @db.BigInt
+  accountAge     Int?    @db.Int
+  sessionTime    String? @db.VarChar(255)
+  followedPlayer String? @db.VarChar(100)
+  followedFriend String? @db.VarChar(100)
+  premium        String? @db.VarChar(100)
+  locale         String? @db.VarChar(100)
+  region         String? @db.VarChar(100)
 }

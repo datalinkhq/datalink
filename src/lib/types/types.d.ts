@@ -17,3 +17,9 @@ export type Log = {
     message?: String
     ]: Array
 }
+
+export type Player = {
+    code: Number
+    status: String
+    playerId?: Number
+}

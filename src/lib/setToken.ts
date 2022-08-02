@@ -11,8 +11,6 @@ async function give(name: string) {
             data: {
                 token: token,
                 name: name,
-                sessionKey: 'null',
-                sessionTime: '0'
             }
         })
 
