@@ -1,5 +1,5 @@
 async function validate(type: String) {
-    if (type === 'error' || type === 'warning' || type === 'info') {
+    if (type === 'Trace' || type === 'Debug' || type === 'Information' || type === 'Warning' || type === 'Error' || type === 'Fatal') {
         return true
     } else {
         return false
