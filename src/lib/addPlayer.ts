@@ -2,6 +2,19 @@ import prisma from './prisma'
 import { toInteger, toNumber } from 'lodash'
 import fetchtoken from './fetchToken'
 
+/**
+ * Creates a "Player" using {@link prisma}
+ * @param {String} eventType
+ * @param {Number} accountId
+ * @param {Number} accountAge
+ * @param {String} sessionTime
+ * @param {Boolean} followedPlayer
+ * @param {Boolean} followedFriend
+ * @param {Boolean} premium
+ * @param {String} locale
+ * @param {String} region
+ * @returns {String}
+ */
 async function main(eventType: String, accountId: Number, accountAge?: Number, sessionTime?: String, followedPlayer?: Boolean, followedFriend?: Boolean, premium?: Boolean, locale?: String, region?: String) {
     if (eventType == 'playerJoined') {
         try {

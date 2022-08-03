@@ -16,8 +16,14 @@ const checkTime = (time: number) => {
         return false;
     }
 }
-
-export default async function validateToken(id: number, token: string): Promise<any> {
+/**
+ * Checks if a given sessionKey is valid using {@link prisma} model User.
+ * NOTE: A sessionKey expires after 30 minutes asynchronously. 
+ * @param {Number} id
+ * @param {string} token
+ * @returns {boolean} 
+ */
+export default async function validateToken(id: number, token: string): Promise<boolean|undefined> {
     let data = await prisma.user.findUnique({
         where: {
             id: toNumber(id)

@@ -1,6 +1,12 @@
 import prisma from './prisma'
 import { toNumber } from 'lodash'
 
+/**
+ * Fetches a sessionKey from {@link prisma} model User.
+ * @param {Number} id
+ * @param {Boolean} debug
+ * @returns {String} 
+ */
 async function get(id: Number, debug?: Boolean) {
     let data = await prisma.user.findUnique({
         where: {

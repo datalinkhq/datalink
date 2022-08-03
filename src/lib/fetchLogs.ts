@@ -1,6 +1,13 @@
 import prisma from './prisma'
 import { toInteger, toNumber } from 'lodash'
 
+/**
+ * Fetches logs from the log {@link prisma} model.
+ * @param {Number} uid
+ * @param {Number} id
+ * @param {Boolean} debug
+ * @returns {Array} 
+ */
 async function get(uid: Number, id?: Number, debug?: Boolean) {
     if (id) {
         let data = await prisma.log.findUnique({

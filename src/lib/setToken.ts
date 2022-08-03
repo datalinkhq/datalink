@@ -2,7 +2,10 @@ import prisma from './prisma'
 import { toNumber } from 'lodash'
 import fetchtoken from './fetchToken'
 import { v4 as uuidv4 } from 'uuid';
-
+/**
+ * Generate and sets a string for {@link prisma} model User.
+ * @param {string} name
+ */
 async function give(name: string) {
     let token: string = uuidv4(); // generate token
     try {
