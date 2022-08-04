@@ -21,7 +21,7 @@ const handler = async function handler(
           sessionKey: session_key.toString()
         },
         data: {
-          sessionKey: 'null'
+          sessionKey: null
         }
       })
 
