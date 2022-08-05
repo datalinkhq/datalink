@@ -19,7 +19,7 @@ const handler = async function handler(
 ) {
     const body = req.body;
     const { id, token, accountId, accountAge, followedPlayer, followedFriend, premium, locale, region } = body;
-    if (id && token && accountId && accountAge && followedPlayer && followedFriend && premium && locale && region) {
+    if (id + token + accountId + accountAge + followedPlayer + followedFriend + premium + locale + region) {
         if (await validateToken(toNumber(id), token.toString()) === true) {
             try {
                 await addPlayer(accountId, accountAge, followedPlayer, followedFriend, premium, locale, region, 'playerJoined');
@@ -30,6 +30,8 @@ const handler = async function handler(
         } else {
             res.status(401).json({ code: 401, status: 'Unauthorized' })
         }
+    } else {
+        res.status(400).json({ code: 400, status: 'Bad Request' })
     }
 }
 
