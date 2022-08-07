@@ -23,3 +23,13 @@ export type Player = {
     status: String
     playerId?: Number
 }
+
+export type Flag = {
+    [
+    code: Number,
+    status: String,
+    flagId?: Promise<number | "Error occurred while creating flag." | undefined>,
+    FeatureName?: String,
+    FeatureValue?: String
+    ]: Array
+}

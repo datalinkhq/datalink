@@ -44,3 +44,12 @@ model Player {
   locale         String? @db.VarChar(100)
   region         String? @db.VarChar(100)
 }
+
+model Flag {
+  id           Int      @id @default(autoincrement())
+  assocId      Int      @db.Int
+  FeatureName  String   @db.VarChar(100)
+  FeatureValue Float    @db.Float
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
