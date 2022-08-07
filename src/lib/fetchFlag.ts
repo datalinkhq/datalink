@@ -8,7 +8,7 @@ import { toInteger, toNumber } from 'lodash'
  * @param {Boolean} debug - If true, returns null if no logs are found.
  * @returns {Array} 
  */
-async function get(uid: Number, id?: Number, debug?: Boolean) {
+async function get(uid: Number, name?: String, id?: Number, debug?: Boolean) {
     if (id) {
         let data = await prisma.flag.findUnique({
             where: {
@@ -32,12 +32,30 @@ async function get(uid: Number, id?: Number, debug?: Boolean) {
             return data
         } else if (!data) {
             if (!debug) {
-                return 'No logs found for this user!'
+                return 'No flags found for this user!'
             } else if (debug === true) {
                 return null
             }
         } else {
             return data
+        }
+    } else if (id && name) {
+        let data = await prisma.flag.findFirst({
+            where: {
+                id: toNumber(id),
+                FeatureName: name.toString()
+            }
+        })
+
+        if (data) {
+            return [data.FeatureName, data.FeatureValue]
+        }
+        else if (!data) {
+            if (!debug) {
+                return 'No flags found for this user!'
+            } else if (debug === true) {
+                return null
+            }
         }
     }
 }

@@ -17,7 +17,7 @@ const handler = async function handler(
     res: NextApiResponse<Flag>
 ) {
     const body = req.body;
-    const { flagid, id, token } = body;
+    const { flagid, id, token, name } = body;
     if (flagid && id && token) {
         if (await validateToken(toNumber(id), token.toString()) === true) {
             try {
@@ -33,8 +33,20 @@ const handler = async function handler(
         if (id && token) {
             if (await validateToken(toNumber(id), token.toString()) === true) {
                 try {
-                    const logs = await fetchFlag(id);
-                    res.status(200).json({ code: 200, status: `Success`, logs })
+                    const flag = await fetchFlag(id);
+                    res.status(200).json({ code: 200, status: `Success`, flag })
+                } catch (e) {
+                    console.log(e)
+                    res.status(500).json({ code: 500, status: `Error` })
+                }
+            } else {
+                res.status(400).json({ code: 401, status: 'Unauthorized' })
+            }
+        } else if (id && name && token) {
+            if (await validateToken(toNumber(id), token.toString()) === true) {
+                try {
+                    const flag = await fetchFlag(id, name);
+                    res.status(200).json({ code: 200, status: `Success`, flag })
                 } catch (e) {
                     console.log(e)
                     res.status(500).json({ code: 500, status: `Error` })
