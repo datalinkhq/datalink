@@ -1,0 +1,3 @@
+[submodule "submodules/subscription-validator"]
+	path = submodules/subscription-validator
+	url = https://github.com/datalinkhq/subscription-validator.git
