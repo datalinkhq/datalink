@@ -13,7 +13,7 @@ fi
 
 # stop execution on error - don't let it build if something goes wrong
 set -e
-
+ 
 # get submodule commit
 output=`git submodule status --recursive` # get submodule info
 no_prefix=${output#*-} # get rid of the prefix

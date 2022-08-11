@@ -15,7 +15,7 @@
 # production
 /build
 
-# misc
+# misc 
 .DS_Store
 *.pem
 
@@ -40,3 +40,4 @@ yarn-error.log*
 .sentryclirc
 
 tmp
+submodules/subscription-validator
