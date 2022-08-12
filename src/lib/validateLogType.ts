@@ -1,6 +1,6 @@
 /**
  * Validates if a given log type is valid.
- * @param {String} type
+ * @param {String} type - Type of the log.
  * @returns {Boolean} 
  */
 async function validate(type: String) {

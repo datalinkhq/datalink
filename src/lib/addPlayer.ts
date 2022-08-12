@@ -4,15 +4,15 @@ import fetchtoken from './fetchToken'
 
 /**
  * Creates a "Player" using {@link prisma}
- * @param {String} eventType
- * @param {Number} accountId
- * @param {Number} accountAge
- * @param {String} sessionTime
- * @param {Boolean} followedPlayer
- * @param {Boolean} followedFriend
- * @param {Boolean} premium
- * @param {String} locale
- * @param {String} region
+ * @param {String} eventType - Type of event.
+ * @param {Number} accountId - Id of the user.
+ * @param {Number} accountAge - Age of the user account.
+ * @param {String} sessionTime - Time of the session.
+ * @param {Boolean} followedPlayer - If the user is following a player.
+ * @param {Boolean} followedFriend - If the user is following a friend.
+ * @param {Boolean} premium - If the user is premium.
+ * @param {String} locale - Language of the user.
+ * @param {String} region - Region of the user.
  * @returns {String}
  */
 async function main(eventType: String, accountId: Number, accountAge?: Number, sessionTime?: String, followedPlayer?: Boolean, followedFriend?: Boolean, premium?: Boolean, locale?: String, region?: String) {

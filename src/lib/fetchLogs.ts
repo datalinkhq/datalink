@@ -3,9 +3,9 @@ import { toInteger, toNumber } from 'lodash'
 
 /**
  * Fetches logs from the log {@link prisma} model.
- * @param {Number} uid
- * @param {Number} id
- * @param {Boolean} debug
+ * @param {Number} uid - Id of the user.
+ * @param {Number} id - Id of the flag.
+ * @param {Boolean} debug - If true, returns null if no logs are found.
  * @returns {Array} 
  */
 async function get(uid: Number, id?: Number, debug?: Boolean) {

@@ -3,8 +3,8 @@ import { toNumber } from 'lodash'
 
 /**
  * Fetches a sessionKey from {@link prisma} model User.
- * @param {Number} id
- * @param {Boolean} debug
+ * @param {Number} id - Id of the user.
+ * @param {Boolean} debug - If true, returns null if no sessionKey is found.
  * @returns {String} 
  */
 async function get(id: Number, debug?: Boolean) {
