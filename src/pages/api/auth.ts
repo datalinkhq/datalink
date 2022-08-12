@@ -7,32 +7,38 @@ import prisma from '../../lib/prisma'
 import { toNumber } from 'lodash'
 import { Data } from '../../lib/types/types'
 import { withSentry } from '@sentry/nextjs';
+import jwt from 'jsonwebtoken'
+import { env } from 'process'
 
-const handler = async function handler (
+const handler = async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
   const query = req.body;
   const { id, token } = query;
   if (token && id) {
-    if (await validateToken(toNumber(id), token.toString()) === true) { 
-      let session_key: any = uuidv4();
+    if (await validateToken(toNumber(id), token.toString()) === true) {
+      let session_key: any = jwt.sign({ data: token }, `${env.SECRET}`);
+      try {
+        await prisma.user.update({
+          where: {
+            id: toNumber(id),
+          },
+          data: {
+            sessionKey: session_key.toString(),
+            sessionTime: Math.floor((new Date()).getTime() / 1000).toString()
+          }
+        })
 
-      await prisma.user.update({
-        where: {
-          id: toNumber(id),
-        },
-        data: {
-          sessionKey: session_key.toString(),
-          sessionTime: Math.floor((new Date()).getTime() / 1000).toString()
-        }
-      })
+        session_key = await prisma.user.findUnique({
+          where: {
+            id: toNumber(id),
+          }
+        })
 
-      session_key = await prisma.user.findUnique({
-        where: {
-          id: toNumber(id),
-        }
-      })
+      } catch (e) {
+        console.log(e)
+      }
       res.status(200).json({ code: 200, status: `Success`, session_key: session_key.sessionKey })
     } else {
       res.status(401).json({ code: 401, status: `Unauthorized` })

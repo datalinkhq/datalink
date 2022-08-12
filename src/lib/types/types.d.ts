@@ -28,7 +28,7 @@ export type Flag = {
     [
     code: Number,
     status: String,
-    flagId?: Promise<number | "Error occurred while creating flag." | undefined>,
+    flagId?: Promise<number | String | undefined>,
     FeatureName?: String,
     FeatureValue?: String
     ]: Array

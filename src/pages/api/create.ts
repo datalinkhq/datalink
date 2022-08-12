@@ -13,13 +13,13 @@ const handler = async function handler(
     res: NextApiResponse<Data>
 ) {
     const body = req.body;
-    const { name } = body;
+    const { name, password } = body;
     let data = await prisma.user.findUnique({
         where: {
-            token: `${await setToken(name.toString())}`
+            token: `${await setToken(name.toString(), password)}`
         }
     })
-    if (name) {
+    if (name && password) {
         try {          
             res.status(200).json({ code: 200, status: `Success`, id: toNumber(data?.id), token: `${data?.token}` })
         } catch (e) {
