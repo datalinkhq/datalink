@@ -16,7 +16,7 @@ const handler = async function handler(
     const { name, password } = body;
     let data = await prisma.user.findUnique({
         where: {
-            token: `${await setToken(name.toString(), password)}`
+            token: `${await setToken("" + name, password)}`
         }
     })
     if (name && password) {
