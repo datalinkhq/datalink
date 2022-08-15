@@ -1,6 +1,9 @@
-export type Data = {
+export type Res = {
     code: Number
     status: String
+}
+
+export type Data = Res & {
     id?: Number
     token?: String
     session_key?: String
@@ -18,9 +21,7 @@ export type Log = {
     ]: Array
 }
 
-export type Player = {
-    code: Number
-    status: String
+export type Player = Res & {
     playerId?: Number
 }
 
