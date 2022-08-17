@@ -7,7 +7,7 @@
     "update": "ncu",
     "upgrade": "ncu -u",
     "dev": "next dev",
-    "build": "pnpm build && next build",
+    "build": "pnpm generate-schema && next build",
     "generate-schema": "prisma generate",
     "start": "next start",
     "lint": "next lint",
