@@ -20,6 +20,7 @@ no_prefix=${output#*-} # get rid of the prefix
 COMMIT="785a46575cf25ce7e3f2d9d7dd59a088e79718d2" #${no_prefix% *} # get rid of the suffix
 
 # set up an empty temporary work directory
+rm -rf submodules/*
 rm -rf tmp || true # remove the tmp folder if exists
 mkdir tmp # create the tmp folder
 cd tmp # go into the tmp folder
