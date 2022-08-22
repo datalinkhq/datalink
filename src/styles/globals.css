@@ -15,8 +15,8 @@
   --font-rubik: "Rubik", sans-serif;
   --font-mono: "Roboto Mono", monospace;
 
-  --white: #fff;
-  --black: #000;
+  --white: rgb(0, 0, 0);
+  --black: rgb(255, 255, 255);
   --brown: rgb(62, 51, 48);
   --brown-fade: rgba(62, 51, 48, 0.3);
   --white-fade: rgba(255, 255, 255, 0.5);
