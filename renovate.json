@@ -2,5 +2,22 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:base"
+  ],
+  "packageRules": [
+    {
+      "lockFileMaintenance": {
+        "enabled": true,
+        "automerge": true
+      },
+      "matchUpdateTypes": [
+        "bump",
+        "major",
+        "patch",
+        "minor",
+        "pin"
+      ],
+      "matchCurrentVersion": "!/^0/",
+      "automerge": true
+    }
   ]
 }
