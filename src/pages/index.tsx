@@ -33,7 +33,7 @@ const Home: NextPage = () => {
           games.
         </h1>
 
-        <div className={styles.buttons}>
+        {/* <div className={styles.buttons}>
           <Link href="/">
             <a>
               <span>Get Started</span>
@@ -46,7 +46,7 @@ const Home: NextPage = () => {
               <i className="ri-arrow-right-up-line"></i>
             </a>
           </Link>
-        </div>
+        </div> */}
       </div>
     </div>
   );

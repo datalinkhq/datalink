@@ -8,13 +8,13 @@ export default function Navbar() {
     return (
       <ul>
         <li>
-          <Link href="/">
-            <a>Pricing</a>
+          <Link href="https://github.com/datalinkhq">
+            <a>GitHub</a>
           </Link>
         </li>
         <li>
-          <Link href="/">
-            <a>About Us</a>
+          <Link href="https://discord.gg/63HTqDWB">
+            <a>Discord</a>
           </Link>
         </li>
       </ul>
@@ -55,10 +55,10 @@ export default function Navbar() {
           </div>
         </div>
         <div>
-          <a href="/login" className={styles.login}>
+          {/* <a href="/login" className={styles.login}>
             <p className={styles.text}>Login</p>
             <i className="ri-arrow-right-up-line"></i>
-          </a>
+          </a> */}
         </div>
       </div>
     </>
