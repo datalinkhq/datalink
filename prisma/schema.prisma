@@ -11,9 +11,9 @@ generator client {
 
 model User {
   id          Int      @id @default(autoincrement())
-  sessionKey  String?  @unique
+  sessionKey  String?  @unique @db.VarChar(202)
   sessionTime String?  @db.VarChar(255)
-  token       String   @unique @db.VarChar(151)
+  token       String   @unique @db.VarChar(202)
   createdAt   DateTime @default(now())
   name        String   @db.VarChar(100)
 }
