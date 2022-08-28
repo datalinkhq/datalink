@@ -13,7 +13,7 @@ model User {
   id          Int      @id @default(autoincrement())
   sessionKey  String?  @unique
   sessionTime String?  @db.VarChar(255)
-  token       String   @unique @db.VarChar(140)
+  token       String   @unique @db.VarChar(151)
   createdAt   DateTime @default(now())
   name        String   @db.VarChar(100)
 }
