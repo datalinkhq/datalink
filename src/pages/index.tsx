@@ -5,9 +5,7 @@ import styles from "../styles/pages/home.module.css";
 const Home: NextPage = () => {
   return (
     <body>
-      /* eslint-disable */
       <script>console.log("Hello there, fellow adventurer! 📣🧠")</script>
-      /* eslint-enable */
       <div className={styles.home}>
         <div className={styles.left}>
           <DashboardExample />
