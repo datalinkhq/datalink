@@ -3,7 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@babel/core': 7.18.13
   '@babel/preset-env': 7.18.10
-  '@faker-js/faker': 7.4.0
+  '@faker-js/faker': 7.5.0
   '@prisma/client': 4.2.1
   '@sentry/nextjs': 7.11.1
   '@types/glob': 7.2.0
@@ -43,7 +43,7 @@ dependencies:
 devDependencies:
   '@babel/core': 7.18.13
   '@babel/preset-env': 7.18.10_@babel+core@7.18.13
-  '@faker-js/faker': 7.4.0
+  '@faker-js/faker': 7.5.0
   '@sentry/nextjs': 7.11.1_opuzalm7bqy6lx7uvhtk6ci2fu
   '@types/glob': 7.2.0
   '@types/jsonwebtoken': 8.5.9
@@ -1306,8 +1306,8 @@ packages:
       - supports-color
     dev: true
 
-  /@faker-js/faker/7.4.0:
-    resolution: {integrity: sha512-xDd3Tvkt2jgkx1LkuwwxpNBy/Oe+LkZBTwkgEFTiWpVSZgQ5sc/LenbHKRHbFl0dq/KFeeq/szyyPtpJRKY0fg==}
+  /@faker-js/faker/7.5.0:
+    resolution: {integrity: sha512-8wNUCCUHvfvI0gQpDUho/3gPzABffnCn5um65F8dzQ86zz6dlt4+nmAA7PQUc8L+eH+9RgR/qzy5N/8kN0Ozdw==}
     engines: {node: '>=14.0.0', npm: '>=6.0.0'}
     dev: true
 
