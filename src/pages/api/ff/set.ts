@@ -16,12 +16,12 @@ const handler = async function handler(
 ) {
     const body = req.body;
     const { id, token, name, value } = body;
-    if (id && token && name && value) {
+    if (id && token && flagid && name && value) {
         if (await validateToken(toNumber(id), token.toString()) === true) {
             if (await validate(value) === true) {
                 try {
-                    const flag = setFlag(name, value, id);
-                    res.status(200).json({ code: 200, status: `Success`, flagId: flag})
+                    const flag = setFlag(name, value, flagid);
+                    res.status(200).json({ code: 200, status: `Success`, flagId: flagid})
                 } catch (e) {
                     res.status(500).json({ code: 500, status: `Error` })
                 }
