@@ -15,7 +15,7 @@ const handler = async function handler(
     res: NextApiResponse<Flag>
 ) {
     const body = req.body;
-    const { id, token, name, value } = body;
+    const { id, token, flagid, name, value } = body;
     if (id && token && flagid && name && value) {
         if (await validateToken(toNumber(id), token.toString()) === true) {
             if (await validate(value) === true) {
