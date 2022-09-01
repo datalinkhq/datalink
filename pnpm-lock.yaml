@@ -4,7 +4,7 @@ specifiers:
   '@babel/core': 7.18.13
   '@babel/preset-env': 7.18.10
   '@faker-js/faker': 7.5.0
-  '@prisma/client': 4.3.0
+  '@prisma/client': 4.3.1
   '@sentry/nextjs': 7.12.0
   '@types/glob': 8.0.0
   '@types/jsonwebtoken': 8.5.9
@@ -20,7 +20,7 @@ specifiers:
   lodash: 4.17.21
   next: 12.2.5
   npm-check-updates: 16.0.5
-  prisma: 4.3.0
+  prisma: 4.3.1
   react: 18.2.0
   react-chartjs-2: 4.3.1
   react-dom: 18.2.0
@@ -31,7 +31,7 @@ specifiers:
   webpack: 5.74.0
 
 dependencies:
-  '@prisma/client': 4.3.0_prisma@4.3.0
+  '@prisma/client': 4.3.1_prisma@4.3.1
   chart.js: 3.9.1
   jsonwebtoken: 8.5.1
   lodash: 4.17.21
@@ -55,7 +55,7 @@ devDependencies:
   eslint: 8.23.0
   eslint-config-next: 12.2.5_sorwav4hsh5vncerguqybud76i
   npm-check-updates: 16.0.5
-  prisma: 4.3.0
+  prisma: 4.3.1
   react: 18.2.0
   ts-node: 10.9.1_57uwcby55h6tzvkj3v5sfcgxoe
   tslib: 2.4.0
@@ -1595,8 +1595,8 @@ packages:
       config-chain: 1.1.13
     dev: true
 
-  /@prisma/client/4.3.0_prisma@4.3.0:
-    resolution: {integrity: sha512-xCjLAOIOqVdjD+UZbUwx5dFocUmdsrMQFe0jXUswTUgc76NOQVh0L7Z+FCkNCVVZ9RSBfEFX22061Sa02OuPAQ==}
+  /@prisma/client/4.3.1_prisma@4.3.1:
+    resolution: {integrity: sha512-FA0/d1VMJNWqzU7WVWTNWJ+lGOLR9JUBnF73GdIPAEVo/6dWk4gHx0EmgeU+SMv4MZoxgOeTBJF2azhg7x0hMw==}
     engines: {node: '>=14.17'}
     requiresBuild: true
     peerDependencies:
@@ -1606,15 +1606,15 @@ packages:
         optional: true
     dependencies:
       '@prisma/engines-version': 4.3.0-32.c875e43600dfe042452e0b868f7a48b817b9640b
-      prisma: 4.3.0
+      prisma: 4.3.1
     dev: false
 
   /@prisma/engines-version/4.3.0-32.c875e43600dfe042452e0b868f7a48b817b9640b:
     resolution: {integrity: sha512-8yWpXkQRmiSfsi2Wb/ZS5D3RFbeu/btL9Pm/gdF4phB0Lo5KGsDFMxFMgaD64mwED2nHc8ZaEJg/+4Jymb9Znw==}
     dev: false
 
-  /@prisma/engines/4.3.0:
-    resolution: {integrity: sha512-JAyU7+QEpLkVtgVMYBSPQt9sUcgFqA/MdD4mK7yx+ZyDfHQlP+nT1rmqFPZ3MofR0mAha7nr3rx0ZNN46gLp9Q==}
+  /@prisma/engines/4.3.1:
+    resolution: {integrity: sha512-4JF/uMaEDAPdcdZNOrnzE3BvrbGpjgV0FcPT3EVoi6I86fWkloqqxBt+KcK/+fIRR0Pxj66uGR9wVH8U1Y13JA==}
     requiresBuild: true
 
   /@rollup/plugin-sucrase/4.0.4_rollup@2.78.0:
@@ -5353,13 +5353,13 @@ packages:
     engines: {node: '>= 0.8.0'}
     dev: true
 
-  /prisma/4.3.0:
-    resolution: {integrity: sha512-Ii588H5IsbSun5BwpNQwrayrHKecFEZ6wDoJ7nr2IsqlMblmkA1dextGBObsG9tg+aIVhTrNa7OAbhbvEfqhdQ==}
+  /prisma/4.3.1:
+    resolution: {integrity: sha512-90xo06wtqil76Xsi3mNpc4Js3SdDRR5g4qb9h+4VWY4Y8iImJY6xc3PX+C9xxTSt1lr0Q89A0MLkJjd8ax6KiQ==}
     engines: {node: '>=14.17'}
     hasBin: true
     requiresBuild: true
     dependencies:
-      '@prisma/engines': 4.3.0
+      '@prisma/engines': 4.3.1
 
   /proc-log/2.0.1:
     resolution: {integrity: sha512-Kcmo2FhfDTXdcbfDH76N7uBYHINxc/8GW7UAVuVP9I+Va3uHSerrnKV6dLooga/gh7GlgzuCCr/eoldnL1muGw==}
