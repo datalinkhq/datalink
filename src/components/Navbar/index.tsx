@@ -1,6 +1,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import styles from "./styles.module.css";
+import Image from "next/image";
+import logo from "../../../assets/dark-transparent.png"
 
 export default function Navbar() {
   const [dropdown, setDropdown] = useState(false);
@@ -47,9 +49,14 @@ export default function Navbar() {
           </div>
         </div>
         <div>
-          <div className={styles.branding}>
-            <h1>Datalink</h1>
-          </div>
+          <Link href="/" >
+            <a>
+              <div className={styles.branding}>
+                <Image src={logo} width={"40"} height={"40"} />
+                <h1>Datalink</h1>
+              </div>
+            </a>
+          </Link>
           <div className={styles.list}>
             <NavItems />
           </div>
