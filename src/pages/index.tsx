@@ -35,20 +35,20 @@ const Home: NextPage = () => {
             games.
           </h1>
 
-          {/* <div className={styles.buttons}>
-          <Link href="/">
-            <a>
-              <span>Get Started</span>
-              <i className="ri-arrow-right-up-line"></i>
-            </a>
-          </Link>
-          <Link href="/">
-            <a>
-              <span>Pricing</span>
-              <i className="ri-arrow-right-up-line"></i>
-            </a>
-          </Link>
-        </div> */}
+          <div className={styles.buttons}>
+            <Link href="https://docs.datalink.dev">
+              <a>
+                <span>Get Started</span>
+                <i className="ri-arrow-right-up-line"></i>
+              </a>
+            </Link>
+            {/* <Link href="/">
+              <a>
+                <span>Pricing</span>
+                <i className="ri-arrow-right-up-line"></i>
+              </a>
+            </Link> */}
+          </div>
         </div>
       </div>
     </body>

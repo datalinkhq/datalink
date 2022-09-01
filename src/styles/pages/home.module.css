@@ -59,6 +59,7 @@
   align-items: center;
   gap: 2rem;
   margin-bottom: 3rem;
+  font-family: var(--font-syne);
 }
 
 .home .right .buttons a {

@@ -13,7 +13,7 @@ export default function Navbar() {
           </Link>
         </li>
         <li>
-          <Link href="https://discord.gg/63HTqDWB">
+          <Link href="https://discord.gg/wME4WyNGyV">
             <a>Discord</a>
           </Link>
         </li>
