@@ -19,7 +19,7 @@ specifiers:
   jsonwebtoken: 8.5.1
   lodash: 4.17.21
   next: 12.2.5
-  npm-check-updates: 16.0.5
+  npm-check-updates: 16.1.0
   prisma: 4.3.1
   react: 18.2.0
   react-chartjs-2: 4.3.1
@@ -54,7 +54,7 @@ devDependencies:
   '@types/uuid': 8.3.4
   eslint: 8.23.0
   eslint-config-next: 12.2.5_sorwav4hsh5vncerguqybud76i
-  npm-check-updates: 16.0.5
+  npm-check-updates: 16.1.0
   prisma: 4.3.1
   react: 18.2.0
   ts-node: 10.9.1_57uwcby55h6tzvkj3v5sfcgxoe
@@ -4940,8 +4940,8 @@ packages:
       npm-normalize-package-bin: 1.0.1
     dev: true
 
-  /npm-check-updates/16.0.5:
-    resolution: {integrity: sha512-0qK6NTmgbq8y39xm4y1tKW5ghEGtWWyiUzSPSQEaqb9elqOfZogV4GQVvBYw3xJlt6igJVXgBUyjNqtPv/j7Yw==}
+  /npm-check-updates/16.1.0:
+    resolution: {integrity: sha512-0oEuD//2DVCjewNq4u0oJyciT5WRSPAz3B0IDnh8rGunrSXy0vXX17DFeI0XOT28mvUWrBtPbjz2Zptd2wvpNQ==}
     engines: {node: '>=14.14'}
     hasBin: true
     dependencies:
