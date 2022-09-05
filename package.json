@@ -25,8 +25,8 @@
     "uuid": "8.3.2"
   },
   "devDependencies": {
-    "@babel/core": "7.18.13",
-    "@babel/preset-env": "7.18.10",
+    "@babel/core": "7.19.0",
+    "@babel/preset-env": "7.19.0",
     "@faker-js/faker": "7.5.0",
     "@sentry/nextjs": "7.12.1",
     "@types/glob": "8.0.0",
