@@ -27,7 +27,7 @@ specifiers:
   ts-node: 10.9.1
   tslib: 2.4.0
   typescript: 4.7.4
-  uuid: 8.3.2
+  uuid: 9.0.0
   webpack: 5.74.0
 
 dependencies:
@@ -38,7 +38,7 @@ dependencies:
   next: 12.2.5_vyk55zyolcaieh7zfm7nf7uva4
   react-chartjs-2: 4.3.1_2unjvz6v6rskedwoxtmbfw2rje
   react-dom: 18.2.0_react@18.2.0
-  uuid: 8.3.2
+  uuid: 9.0.0
 
 devDependencies:
   '@babel/core': 7.19.0
@@ -6501,8 +6501,8 @@ packages:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
     dev: true
 
-  /uuid/8.3.2:
-    resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
+  /uuid/9.0.0:
+    resolution: {integrity: sha512-MXcSTerfPa4uqyzStbRoTgt5XIe3x5+42+q1sDuy3R5MDk66URdLMOZe5aPX/SQd+kuYAh0FdP/pO28IkQyTeg==}
     hasBin: true
     dev: false
 
