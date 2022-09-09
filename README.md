@@ -3,6 +3,8 @@
 <br>
 <div>&nbsp;</div>
 
+### ⚠ Please restar this repo as it was accidentally deleted. We're still actively recovering.
+
 ## Introduction
 
 Datalink solves all your analytics needs for your games which are otherwise harder to implement. Simple add a module to your game and you're good to go! 
