@@ -2,9 +2,10 @@
 <div align="center"><img src="https://raw.githubusercontent.com/datalinkhq/datalink/main/assets/light-wideshot.png#gh-light-mode-only" width="50%" ></div>
 <div align="center">A lightweight analytics system for ROBLOX</div>
 <br>
+<div align="center"> <h3> ⚠ Please restar this repo as it was accidentally deleted. We're still actively recovering. </h3> </div>
 <div>&nbsp;</div>
 
-### ⚠ Please restar this repo as it was accidentally deleted. We're still actively recovering.
+---
 
 ## Introduction
 
@@ -12,7 +13,7 @@ Datalink solves all your analytics needs for your games which are otherwise hard
 
 ## Quick start & Documentation
 
-Datalink is not ready as of right now, check out our release roadmap to find out more.
+View the [docs](https://docs.datalink.dev) to learn more.
 
 <!-- ## Games that use Datalink
 
