@@ -9,7 +9,7 @@
 
 ## Introduction
 
-Datalink solves all your analytics needs for your games which are otherwise harder to implement. Simple add a module to your game and you're good to go! 
+Datalink solves all your analytics needs for your games which are otherwise harder to implement. Simply add a module to your game and you're good to go! 
 
 ## Quick start & Documentation
 
