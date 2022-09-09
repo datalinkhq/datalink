@@ -1,4 +1,5 @@
-<div align="center"><img src="https://user-images.githubusercontent.com/74418041/180656728-6201c66a-38b9-4235-a2a3-949a3d691596.png"></div>
+<div align="center"><img src="https://raw.githubusercontent.com/datalinkhq/datalink/main/assets/dark-wideshot.png#gh-dark-mode-only" width="50%" ></div>
+<div align="center"><img src="https://raw.githubusercontent.com/datalinkhq/datalink/main/assets/light-wideshot.png#gh-light-mode-only" width="50%" ></div>
 <div align="center">A lightweight analytics system for ROBLOX</div>
 <br>
 <div>&nbsp;</div>
