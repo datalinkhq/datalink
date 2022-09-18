@@ -47,7 +47,7 @@ const Home: NextPage = () => {
         <div className={styles.right}>
           <h3>Meet datalink.</h3>
           <h1>
-            A futuristic and lightweight analytics platform for upcoming ROBLOX
+            A futuristic and lightweight data platform for upcoming ROBLOX
             games.
           </h1>
 
