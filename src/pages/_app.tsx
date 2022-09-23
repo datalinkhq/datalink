@@ -22,13 +22,13 @@ import Navbar from "../components/Navbar";
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
+      <Script src="https://analytics.datalink.dev/latest.js"  />
       <Head>
         <title>datalink. | Home</title>
         <link
           href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
           rel="stylesheet"
         />
-        <Script src="https://analytics.datalink.dev/latest.js"  />
       </Head>
       <Navbar />
       <Component {...pageProps} />
