@@ -25,7 +25,7 @@ const { withSentryConfig } = require('@sentry/nextjs');
 
 const moduleExports = {
   reactStrictMode: true,
-  swcMinify: true,
+  swcMinify: false,
 };
 
 const sentryWebpackPluginOptions = {
