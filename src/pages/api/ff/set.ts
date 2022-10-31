@@ -19,11 +19,11 @@ import setToken from '../../../lib/setToken'
 import fetchToken from '../../../lib/fetchToken'
 import validateToken from '../../../lib/validateSession'
 import prisma from '../../../lib/prisma'
-import { toNumber } from 'lodash'
 import { Flag } from '../../../lib/types/types'
 import { withSentry } from '@sentry/nextjs'
 import validate from '../../../lib/validateFloat'
 import setFlag from '../../../lib/setFlag'
+import { validateFastFlagTypes } from '../../../lib/validateTypeZ'
 
 const handler = async function handler(
     req: NextApiRequest,
@@ -31,11 +31,11 @@ const handler = async function handler(
 ) {
     const body = req.body;
     const { id, token, flagid, name, value } = body;
-    if (id && token && flagid && name && value) {
-        if (await validateToken(toNumber(id), token.toString()) === true) {
+    if (id && token && flagid && name && value && validateFastFlagTypes("set", id, token, flagid, name, value)) {
+        if (await validateToken(id as number, token as string) === true) {
             if (await validate(value) === true) {
                 try {
-                    const flag = setFlag(name, value, flagid);
+                    setFlag(name, value, flagid);
                     res.status(200).json({ code: 200, status: `Success`, flagId: flagid})
                 } catch (e) {
                     res.status(500).json({ code: 500, status: `Error` })

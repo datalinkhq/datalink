@@ -21,6 +21,7 @@ import { toNumber, toInteger } from 'lodash'
 import prisma from '../../../lib/prisma'
 import { Data } from '../../../lib/types/types'
 import { withSentry } from '@sentry/nextjs'
+import { validateEventTypes } from '../../../lib/validateTypeZ'
 
 const handler = async function handler(
     req: NextApiRequest,
@@ -31,8 +32,8 @@ const handler = async function handler(
         const { id, token, DateISO, ServerID, PlaceID, Packet } = body
         const headers = req.headers
         const placeId = headers['Roblox-Id']
-        if (id && token && DateISO && ServerID && Packet.EventID && Packet.EventName, Packet.PurchaseID) {
-            if (await validateToken(toNumber(id), token.toString()) === true) {
+        if (id && token && DateISO && ServerID && Packet.EventID && Packet.EventName, Packet.PurchaseID && validateEventTypes("update", id, token, DateISO, ServerID, Packet, placeId)) {
+            if (await validateToken(id as number, token as string) === true) {
                 try {
                     await prisma.analytics.update({
                         where: {
@@ -45,7 +46,7 @@ const handler = async function handler(
                         }
                     })
                     res.status(200).json({ code: 200, status: `success` })
-                    console.log(`Created event: ${Packet.EventName} with ID: ${Packet.EventID}.`)
+                    console.log(`Created event ${Packet.EventName} with ID: ${Packet.EventID}.`)
 
                 } catch (e) {
                     console.log(e)

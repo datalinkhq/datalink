@@ -22,6 +22,7 @@ import prisma from '../../../lib/prisma'
 import { Data } from '../../../lib/types/types'
 import { withSentry } from '@sentry/nextjs'
 import { v4 as uuidv4 } from 'uuid';
+import { validateEventTypes } from '../../../lib/validateTypeZ'
 
 const handler = async function handler(
     req: NextApiRequest,
@@ -33,15 +34,15 @@ const handler = async function handler(
         const { id, token, DateISO, ServerID, Packet, } = body
         const headers = req.headers
         const placeId = headers['Roblox-Id']
-        if (id && token && DateISO && ServerID && Packet.EventName) {
-            if (await validateToken(toNumber(id), token.toString()) === true) {
+        if (id && token && DateISO && ServerID && Packet.EventName && validateEventTypes("publish", id, token, DateISO, ServerID, Packet, placeId)) {
+            if (await validateToken(id as number, token as string) === true) {
                 try {
                     await prisma.analytics.create({     
                         data: {
                             PlaceID: toInteger(placeId),
                             ServerID: BigInt(ServerID),
                             EventID: EventID,
-                            EventName: Packet.EventName.toString()
+                            EventName: Packet.EventName as string
                         }
                     })
                     let data = await prisma.analytics.findUnique({
@@ -50,7 +51,7 @@ const handler = async function handler(
                         }
                     })
                     res.status(200).json({ code: 200, status: `success`, EventID: data?.EventID })
-                    console.log(`Created event: ${Packet.EventName} with ID: ${data?.EventID}.`)
+                    console.log(`Created event ${Packet.EventName} with ID: ${data?.EventID}.`)
 
                 } catch (e) {
                     console.log(e)

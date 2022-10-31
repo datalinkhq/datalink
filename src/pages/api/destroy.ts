@@ -18,9 +18,9 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import fetchtoken from '../../lib/fetchToken'
 import validateToken from '../../lib/validateToken'
 import prisma from '../../lib/prisma'
-import { toNumber } from 'lodash'
 import { Data } from '../../lib/types/types'
 import { withSentry } from '@sentry/nextjs'
+import { validateAuthTypes } from '../../lib/validateTypeZ'
 
 const handler = async function handler(
   req: NextApiRequest,
@@ -28,12 +28,12 @@ const handler = async function handler(
 ) {
   const query = req.body;
   const { id, token, session_key } = query;
-  if (token && id && session_key) {
-    if (await validateToken(toNumber(id), token.toString()) === true) {
+  if (token && id && session_key && validateAuthTypes(id, token)) {
+    if (await validateToken(id as number, token as string) === true) {
 
       await prisma.user.update({
         where: {
-          sessionKey: session_key.toString()
+          sessionKey: session_key as string
         },
         data: {
           sessionKey: null

@@ -19,9 +19,10 @@ import fetchtoken from '../../lib/fetchToken'
 import { v4 as uuidv4 } from 'uuid';
 import validateToken from '../../lib/validateSession'
 import prisma from '../../lib/prisma'
-import { toNumber } from 'lodash'
 import { Data } from '../../lib/types/types'
 import { withSentry } from '@sentry/nextjs';
+import { validateAuthTypes } from '../../lib/validateTypeZ';
+
 
 const handler = async function handler(
     req: NextApiRequest,
@@ -29,10 +30,11 @@ const handler = async function handler(
 ) {
     const query = req.body;
     const { id, token } = query;
-    if (token && id) {
-        if (await validateToken(toNumber(id), token.toString()) === true) {
+
+    if (token && id && validateAuthTypes(id, token)) {
+        if (await validateToken(id as number, token as string) === true) {
             res.status(200).json({ code: 200, status: `Session Key OK` })
-        } else if (await validateToken(toNumber(id), token.toString()) === false) {
+        } else if (await validateToken(id as number, token as string) === false) {
             res.status(401).json({ code: 401, status: `Session Key Invalid` })
         }
     } else {

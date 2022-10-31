@@ -19,7 +19,6 @@ import setToken from '../../../lib/setToken'
 import fetchToken from '../../../lib/fetchToken'
 import validateToken from '../../../lib/validateSession'
 import prisma from '../../../lib/prisma'
-import { toNumber } from 'lodash'
 import { Player } from '../../../lib/types/types'
 import { withSentry } from '@sentry/nextjs'
 import validate from '../../../lib/validateLogType'
@@ -27,6 +26,7 @@ import logEvent from '../../../lib/logEvent'
 import fetchLogs from '../../../lib/fetchLogs'
 import { toInteger } from 'lodash'
 import addPlayer from '../../../lib/addPlayer'
+import { validatePlayerTypes } from '../../../lib/validateTypeZ'
 
 const handler = async function handler(
     req: NextApiRequest,
@@ -34,8 +34,8 @@ const handler = async function handler(
 ) {
     const body = req.body;
     const { id, token, accountId, sessionTime } = body;
-    if (id && token && accountId && sessionTime) {
-        if (await validateToken(toNumber(id), token.toString()) === true) {
+    if (id && token && accountId && sessionTime && validatePlayerTypes("playerLeft", id, token, accountId, undefined, undefined, undefined, undefined, undefined, undefined, sessionTime)) {
+        if (await validateToken(id as number, token as string) === true) {
             try {
                 await addPlayer('playerLeft', accountId, undefined, sessionTime);
                 res.status(200).json({ code: 200, status: `Success`, playerId: accountId })

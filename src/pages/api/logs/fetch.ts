@@ -26,6 +26,7 @@ import validate from '../../../lib/validateLogType'
 import logEvent from '../../../lib/logEvent'
 import fetchLogs from '../../../lib/fetchLogs'
 import { toInteger } from 'lodash'
+import { validateInputLogTypes } from '../../../lib/validateTypeZ'
 
 const handler = async function handler(
     req: NextApiRequest,
@@ -33,7 +34,7 @@ const handler = async function handler(
 ) {
     const body = req.body;
     const { logid, id, token } = body;
-    if (logid && id && token) {
+    if (logid && id && token && validateInputLogTypes('fetch', id, token, undefined, undefined, undefined, logid)) {
         if (await validateToken(toNumber(id), token.toString()) === true) {
             try {
                 const logs = await fetchLogs(toNumber(logid));

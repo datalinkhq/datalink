@@ -6,7 +6,7 @@
 // $$ |  $$ |$$  __$$ | $$ |$$\ $$  __$$ |$$ |$$ |$$ |  $$ |$$  _$$<  
 // $$$$$$$  |\$$$$$$$ | \$$$$  |\$$$$$$$ |$$ |$$ |$$ |  $$ |$$ | \$$\ 
 // \_______/  \_______|  \____/  \_______|\__|\__|\__|  \__|\__|  \__|     
-                 
+
 // Copyright (c) 2022 Datalink Contributors. All rights reserved.  
 
 // This source code is licensed under the MIT license.
@@ -19,14 +19,13 @@ import setToken from '../../../lib/setToken'
 import fetchToken from '../../../lib/fetchToken'
 import validateToken from '../../../lib/validateSession'
 import prisma from '../../../lib/prisma'
-import { toNumber } from 'lodash'
 import { Player } from '../../../lib/types/types'
 import { withSentry } from '@sentry/nextjs'
 import validate from '../../../lib/validateLogType'
 import logEvent from '../../../lib/logEvent'
 import fetchLogs from '../../../lib/fetchLogs'
-import { toInteger } from 'lodash'
 import addPlayer from '../../../lib/addPlayer'
+import { validatePlayerTypes } from '../../../lib/validateTypeZ'
 
 const handler = async function handler(
     req: NextApiRequest,
@@ -34,19 +33,21 @@ const handler = async function handler(
 ) {
     const body = req.body;
     const { id, token, accountId, accountAge, followedPlayer, followedFriend, premium, locale, region } = body;
-    if (id + token + accountId + accountAge + followedPlayer + followedFriend + premium + locale + region) {
-        if (await validateToken(toNumber(id), token.toString()) === true) {
-            try {
-                await addPlayer(accountId, accountAge, followedPlayer, followedFriend, premium, locale, region, 'playerJoined');
-                res.status(200).json({ code: 200, status: `Success`, playerId: accountId })
-            } catch (e) {
-                res.status(500).json({ code: 500, status: `Error` })
+    if (validatePlayerTypes("playerJoined", id, token, accountId, accountAge, followedFriend, followedFriend, premium, locale, region) === true) {
+        if (id + token + accountId + accountAge + followedPlayer + followedFriend + premium + locale + region) {
+            if (await validateToken(id as number, token as string) === true) {
+                try {
+                    await addPlayer(accountId, accountAge, followedPlayer, followedFriend, premium, locale, region, 'playerJoined');
+                    res.status(200).json({ code: 200, status: `Success`, playerId: accountId })
+                } catch (e) {
+                    res.status(500).json({ code: 500, status: `Error` })
+                }
+            } else {
+                res.status(401).json({ code: 401, status: 'Unauthorized' })
             }
         } else {
-            res.status(401).json({ code: 401, status: 'Unauthorized' })
+            res.status(400).json({ code: 400, status: 'Bad Request' })
         }
-    } else {
-        res.status(400).json({ code: 400, status: 'Bad Request' })
     }
 }
 

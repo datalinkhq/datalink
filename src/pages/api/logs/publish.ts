@@ -19,11 +19,11 @@ import setToken from '../../../lib/setToken'
 import fetchToken from '../../../lib/fetchToken'
 import validateToken from '../../../lib/validateSession'
 import prisma from '../../../lib/prisma'
-import { toNumber } from 'lodash'
 import { Data } from '../../../lib/types/types'
 import { withSentry } from '@sentry/nextjs'
 import validate from '../../../lib/validateLogType'
 import logEvent from '../../../lib/logEvent'
+import { validateInputLogTypes } from '../../../lib/validateTypeZ'
 
 const handler = async function handler(
     req: NextApiRequest,
@@ -31,8 +31,8 @@ const handler = async function handler(
 ) {
     const body = req.body;
     const { id, token, trace, type, message } = body;
-    if (id && token && trace && type && message) {
-        if (await validateToken(toNumber(id), token.toString()) === true) {
+    if (id && token && trace && type && message && validateInputLogTypes('publish', id, token, trace, type, message)) {
+        if (await validateToken(id as number, token as string) === true) {
             if (await validate(type) === true) {
                 try {
                     logEvent(type, trace, body, message);

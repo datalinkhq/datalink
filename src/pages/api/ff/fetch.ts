@@ -19,13 +19,13 @@ import setToken from '../../../lib/setToken'
 import fetchToken from '../../../lib/fetchToken'
 import validateToken from '../../../lib/validateSession'
 import prisma from '../../../lib/prisma'
-import { toNumber } from 'lodash'
 import { Flag } from '../../../lib/types/types'
 import { withSentry } from '@sentry/nextjs'
 import validate from '../../../lib/validateLogType'
 import logEvent from '../../../lib/logEvent'
 import fetchFlag from '../../../lib/fetchFlag'
 import { toInteger } from 'lodash'
+import { validateFastFlagTypes } from '../../../lib/validateTypeZ'
 
 const handler = async function handler(
     req: NextApiRequest,
@@ -33,10 +33,10 @@ const handler = async function handler(
 ) {
     const body = req.body;
     const { flagid, id, token, name } = body;
-    if (flagid && id && token) {
-        if (await validateToken(toNumber(id), token.toString()) === true) {
+    if (flagid && id && token && validateFastFlagTypes("fetch", id, token, flagid, name)) {
+        if (await validateToken(id as number, token as string) === true) {
             try {
-                const flag = await fetchFlag(toNumber(flagid));
+                const flag = await fetchFlag(flagid as number);
                 res.status(200).json({ code: 200, status: `Success`, flag })
             } catch (e) {
                 res.status(500).json({ code: 500, status: `Error` })
@@ -46,7 +46,7 @@ const handler = async function handler(
         }
     } else {
         if (id && token) {
-            if (await validateToken(toNumber(id), token.toString()) === true) {
+            if (await validateToken(id as number, token as string) === true) {
                 try {
                     const flag = await fetchFlag(id);
                     res.status(200).json({ code: 200, status: `Success`, flag })
@@ -58,7 +58,7 @@ const handler = async function handler(
                 res.status(400).json({ code: 401, status: 'Unauthorized' })
             }
         } else if (id && name && token) {
-            if (await validateToken(toNumber(id), token.toString()) === true) {
+            if (await validateToken(id as number, token as string) === true) {
                 try {
                     const flag = await fetchFlag(id, name);
                     res.status(200).json({ code: 200, status: `Success`, flag })

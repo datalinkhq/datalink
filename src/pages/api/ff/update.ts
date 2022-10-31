@@ -24,6 +24,7 @@ import { Data } from '../../../lib/types/types'
 import { withSentry } from '@sentry/nextjs'
 import validate from '../../../lib/validateFloat'
 import updateFlag from '../../../lib/updateFlag'
+import { validateFastFlagTypes } from '../../../lib/validateTypeZ'
 
 const handler = async function handler(
     req: NextApiRequest,
@@ -31,7 +32,7 @@ const handler = async function handler(
 ) {
     const body = req.body;
     const { id, token, name, value } = body;
-    if (id && token && value) {
+    if (id && token && value && validateFastFlagTypes("update", id, token, undefined, name, value)) {
         if (await validateToken(toNumber(id), token.toString()) === true) {
             if (await validate(value) === true) {
                 try {
