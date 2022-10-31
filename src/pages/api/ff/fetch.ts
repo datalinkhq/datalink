@@ -57,7 +57,7 @@ const handler = async function handler(
             } else {
                 res.status(400).json({ code: 401, status: 'Unauthorized' })
             }
-        } else if (id && name && token) {
+        } else if (id && name && token && validateFastFlagTypes("fetch", id, token, undefined, name)) {
             if (await validateToken(id as number, token as string) === true) {
                 try {
                     const flag = await fetchFlag(id, name);

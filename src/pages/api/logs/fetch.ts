@@ -46,8 +46,8 @@ const handler = async function handler(
             res.status(400).json({ code: 401, status: 'Unauthorized' })
         }
     } else {
-        if (id && token) {
-            if (await validateToken(toNumber(id), token.toString()) === true) {
+        if (id && token && validateInputLogTypes('fetch', id, token, undefined, undefined, undefined, undefined)) {
+            if (await validateToken(id as number, token as string) === true) {
                 try {
                     const logs = await fetchLogs(id);
                     res.status(200).json({ code: 200, status: `Success`, logs })
