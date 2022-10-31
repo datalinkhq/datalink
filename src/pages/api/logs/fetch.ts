@@ -35,7 +35,7 @@ const handler = async function handler(
     const body = req.body;
     const { logid, id, token } = body;
     if (logid && id && token && validateInputLogTypes('fetch', id, token, undefined, undefined, undefined, logid)) {
-        if (await validateToken(toNumber(id), token.toString()) === true) {
+        if (await validateToken(id as number, token as string) === true) {
             try {
                 const logs = await fetchLogs(toNumber(logid));
                 res.status(200).json({ code: 200, status: `Success`, logs })

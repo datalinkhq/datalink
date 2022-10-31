@@ -33,7 +33,7 @@ const handler = async function handler(
     const body = req.body;
     const { id, token, name, value } = body;
     if (id && token && value && validateFastFlagTypes("update", id, token, undefined, name, value)) {
-        if (await validateToken(toNumber(id), token.toString()) === true) {
+        if (await validateToken(id as number, token as string) === true) {
             if (await validate(value) === true) {
                 try {
                     updateFlag(name, value, id);
