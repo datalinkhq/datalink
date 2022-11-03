@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@prisma/client": "^4.5.0",
+    "@sentry/nextjs": "^7.17.4",
     "chart.js": "3.9.1",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.21",
@@ -35,7 +36,6 @@
     "@babel/core": "7.19.0",
     "@babel/preset-env": "7.19.0",
     "@faker-js/faker": "7.5.0",
-    "@sentry/nextjs": "^7.17.4",
     "@types/glob": "8.0.0",
     "@types/jsonwebtoken": "8.5.9",
     "@types/lodash": "4.14.184",
