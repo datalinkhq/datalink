@@ -11,7 +11,7 @@
     "build": "pnpm generate-schema && next build",
     "build:turbo": "pnpm generate-schema && next build --turbo",
     "generate-schema:proxy": "prisma generate --data-proxy",
-    "generate-schema": "prisma generate",
+    "generate-schema": "pnpm prisma generate",
     "push-schema": "prisma db push",
     "start": "next start",
     "lint": "next lint",
