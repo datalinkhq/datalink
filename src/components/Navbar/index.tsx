@@ -27,12 +27,12 @@ export default function Navbar() {
       <ul>
         <li>
           <Link href="https://github.com/datalinkhq">
-            <a>GitHub</a>
+            GitHub
           </Link>
         </li>
         <li>
           <Link href="https://discord.gg/wME4WyNGyV">
-            <a>Discord</a>
+            Discord
           </Link>
         </li>
       </ul>
@@ -66,12 +66,10 @@ export default function Navbar() {
         </div>
         <div>
           <Link href="/" >
-            <a>
               <div className={styles.branding}>
-                <Image src={logo} width={"40"} height={"40"} />
+                <Image alt={"logo"} src={logo} width={"40"} height={"40"} />
                 <h1>Datalink</h1>
               </div>
-            </a>
           </Link>
           <div className={styles.list}>
             <NavItems />

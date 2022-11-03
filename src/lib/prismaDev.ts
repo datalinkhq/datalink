@@ -14,21 +14,21 @@
 // Original licensing can be found in LICENSE in the root 
 // directory of this source tree.
 
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient as PrismaClientDev } from '@prisma/client';
 /**
  * Prisma client with production/development mode.
- * @returns {PrismaClient} 
+ * @returns {PrismaClientDev} 
  */
-let prisma: PrismaClient;
+let prisma: PrismaClientDev;
 
 if (process.env.NODE_ENV === "production") {
-  prisma = new PrismaClient();
+  prisma = new PrismaClientDev();
 } else {
   let globalWithPrisma = global as typeof globalThis & {
-    prisma: PrismaClient;
+    prisma: PrismaClientDev;
   };
   if (!globalWithPrisma.prisma) {
-    globalWithPrisma.prisma = new PrismaClient();
+    globalWithPrisma.prisma = new PrismaClientDev();
   }
   prisma = globalWithPrisma.prisma;
 } 

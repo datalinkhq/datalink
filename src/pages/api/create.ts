@@ -30,22 +30,22 @@ const handler = async function handler(
     const body = req.body;
     const { name, password } = body;
 
-    if (validateCreationTypes(name, password) === true) {
+    if (name && password && validateCreationTypes(name, password) === true) {
         let data = await prisma.user.findUnique({
             where: {
                 token: `${await setToken(name as string, password as string)}`
             }
         })
-        if (name && password) {
-            try {
-                res.status(200).json({ code: 200, status: `Success`, id: data?.id as number, token: `${data?.token}` })
-            } catch (e) {
-                res.status(500).json({ code: 500, status: `Error` })
-            }
-        } else {
-            res.status(400).json({ code: 400, status: 'Bad Request' })
+        try {
+            res.status(200).json({ code: 200, status: `Success`, id: data?.id as number, token: `${data?.token}` })
+        } catch (e) {
+            res.status(500).json({ code: 500, status: `Error` })
         }
+
+    } else {
+        res.status(400).json({ code: 400, status: 'Bad Request' })
     }
 }
+
 
 export default withSentry(handler)
