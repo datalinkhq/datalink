@@ -1,3 +1,6 @@
 [submodule "submodules/subscription-validator"]
 	path = submodules/subscription-validator
 	url = https://github.com/datalinkhq/subscription-validator.git
+[submodule "submodules/quickie"]
+	path = submodules/quickie
+	url = https://github.com/datalinkhq/quickie.git
