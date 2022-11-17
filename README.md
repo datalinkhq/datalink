@@ -2,7 +2,6 @@
 <div align="center"><img src="https://raw.githubusercontent.com/datalinkhq/datalink/main/assets/light-wideshot.png#gh-light-mode-only" width="50%" ></div>
 <div align="center">A lightweight data platform for ROBLOX</div>
 <br>
-<div align="center"> <h3> ⚠ Please restar this repo as it was accidentally deleted. We're still actively recovering. </h3> </div>
 <div>&nbsp;</div>
 
 ---
