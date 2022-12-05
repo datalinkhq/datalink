@@ -19,23 +19,35 @@ import fetchtoken from '../../lib/fetchToken'
 import { v4 as uuidv4 } from 'uuid';
 import validateToken from '../../lib/validateSession'
 import prisma from '../../lib/prisma'
-import { Data } from '../../lib/types/types'
+import { Data, Heartbeat, Res } from '../../lib/types/types'
 import { withSentry } from '@sentry/nextjs';
 import { validateAuthTypes } from '../../lib/validateTypeZ';
+import { isObject } from 'lodash';
 
 
 const handler = async function handler(
     req: NextApiRequest,
-    res: NextApiResponse<Data>
+    res: NextApiResponse<Heartbeat | Res>
 ) {
     const query = req.body;
     const { id, token } = query;
 
     if (token && id && validateAuthTypes(id, token)) {
-        if (await validateToken(id as number, token as string) === true) {
+        const validation = await validateToken(id as number, token as string)
+        if (!validation) res.status(502).json({ code: 502, status: `Internal Server Error` }); 
+        if (validation === true) {
             res.status(200).json({ code: 200, status: `Session Key OK` })
-        } else if (await validateToken(id as number, token as string) === false) {
+        } else if (validation === false) {
             res.status(401).json({ code: 401, status: `Session Key Invalid` })
+        } 
+        
+        if (isObject(validateToken)) {
+            const validation = (validateToken as unknown as { state: boolean, expiringSoon: boolean })
+
+            if (validation.state === true) {
+                res.status(200).json({ code: 200, status: `Session Key OK`, expiringSoon: validation.expiringSoon })
+            }
+            
         }
     } else {
         res.status(400).json({ code: 400, status: 'Bad Request' })

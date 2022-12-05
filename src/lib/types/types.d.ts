@@ -50,3 +50,7 @@ export type Flag = {
     FeatureValue?: String
     ]: Array
 }
+
+export type Heartbeat = Res & {
+    expiringSoon: Boolean
+}

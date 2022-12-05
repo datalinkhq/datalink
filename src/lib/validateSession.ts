@@ -27,9 +27,24 @@ import jwt from 'jsonwebtoken';
  * @param {string} token - sessionKey of the user.
  * @returns {boolean} 
  */
-export default async function validateToken(id: number, token: string): Promise<Boolean | undefined> {
+export default async function validateToken(id: number, token: string): Promise<Boolean | { state: boolean, expiringSoon: boolean } | undefined> {
     try {
-        jwt.verify(token, `${env.SECRET}`);
+        const parsed = jwt.verify(token, `${env.SECRET}`);
+
+        if (typeof parsed == "string") {
+            return false
+        } else {
+            const expiringAt = parsed.exp
+            if (!expiringAt) return false
+
+            const now = new Date() as unknown as number
+
+            const ttl = expiringAt * 1000 - now
+
+            if (ttl <= 3000) return { state: true, expiringSoon: true } 
+            
+        }
+
         const exists = await fetchtoken(id, true)
         if (exists == null) {
             return false
