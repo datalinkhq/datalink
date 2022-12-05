@@ -30,13 +30,10 @@ import jwt from 'jsonwebtoken';
 export default async function validateToken(id: number, token: string): Promise<Boolean | { state: boolean, expiringSoon: boolean } | undefined> {
     try {
         const parsed = jwt.verify(token, `${env.SECRET}`);
-
-        if (typeof parsed == "string") {
-            return false
-        } else {
+        
+        if (typeof parsed !== "string") {
             const expiringAt = parsed.exp
             if (!expiringAt) return false
-
             const now = new Date() as unknown as number
 
             const ttl = expiringAt * 1000 - now
