@@ -74,7 +74,7 @@ function validateInputLogTypes(endpoint: "publish" | "fetch", id: any, token: an
         }
 
         if (!endpoint) {
-            Error('Invalid endpoint type')
+            throw new Error('Invalid endpoint type')
         }
     } catch (e) {
         return false
@@ -115,7 +115,7 @@ function validatePlayerTypes(endpoint: "playerJoined" | "playerLeft", id: any, t
 
 
         if (!endpoint) {
-            Error('Invalid endpoint type')
+            throw new Error('Invalid endpoint type')
         }
     } catch (e) {
         return false
@@ -128,7 +128,7 @@ function validateFastFlagTypes(endpoint: "fetch" | "set" | "update", id?: any, t
             const validator = z.object({
                 id: z.number(),
                 token: z.string(),
-                flagid: z.number(),
+                flagid: z.number().nullable(),
                 name: z.string()
             })
 
@@ -140,7 +140,7 @@ function validateFastFlagTypes(endpoint: "fetch" | "set" | "update", id?: any, t
             const validator = z.object({
                 id: z.number(),
                 token: z.string(),
-                flagid: z.number(),
+                flagid: z.number().nullable(),
                 name: z.string(),
                 value: z.number()
             })
@@ -162,7 +162,7 @@ function validateFastFlagTypes(endpoint: "fetch" | "set" | "update", id?: any, t
         }
 
         if (!endpoint) {
-            Error('Invalid endpoint type')
+            throw new Error('Invalid endpoint type')
         }
 
     } catch (e) {
@@ -192,7 +192,7 @@ function validateEventTypes(endpoint: 'publish' | 'update', id: any, token: any,
         }
 
         if (!endpoint) {
-            Error('Invalid endpoint type')
+            throw new Error('Invalid endpoint type')
         }
 
     } catch (e) {

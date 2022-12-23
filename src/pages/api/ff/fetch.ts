@@ -6,7 +6,7 @@
 // $$ |  $$ |$$  __$$ | $$ |$$\ $$  __$$ |$$ |$$ |$$ |  $$ |$$  _$$<  
 // $$$$$$$  |\$$$$$$$ | \$$$$  |\$$$$$$$ |$$ |$$ |$$ |  $$ |$$ | \$$\ 
 // \_______/  \_______|  \____/  \_______|\__|\__|\__|  \__|\__|  \__|     
-                 
+
 // Copyright (c) 2022 Datalink Contributors. All rights reserved.  
 
 // This source code is licensed under the MIT license.
@@ -27,13 +27,14 @@ import fetchFlag from '../../../lib/fetchFlag'
 import { toInteger } from 'lodash'
 import { validateFastFlagTypes } from '../../../lib/validateTypeZ'
 
-const handler = async function handler(
+
+export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse<Flag>
 ) {
     const body = req.body;
     const { flagid, id, token, name } = body;
-    if (flagid && id && token && validateFastFlagTypes("fetch", id, token, flagid, name)) {
+    if (flagid && id && token) {
         if (await validateToken(id as number, token as string) === true) {
             try {
                 const flag = await fetchFlag(flagid as number);
@@ -44,10 +45,11 @@ const handler = async function handler(
         } else {
             res.status(400).json({ code: 401, status: 'Unauthorized' })
         }
-    } else {
-        if (id && token && validateFastFlagTypes("fetch", id, token, flagid, name)) {
+    } else if (id && token) {
+        if (validateFastFlagTypes("fetch", id, token, flagid, name)) {
             if (await validateToken(id as number, token as string) === true) {
                 try {
+                    console.log("id & token")
                     const flag = await fetchFlag(id);
                     res.status(200).json({ code: 200, status: `Success`, flag })
                 } catch (e) {
@@ -57,7 +59,7 @@ const handler = async function handler(
             } else {
                 res.status(400).json({ code: 401, status: 'Unauthorized' })
             }
-        } else if (id && name && token && validateFastFlagTypes("fetch", id, token, undefined, name)) {
+        } else if (name && validateFastFlagTypes("fetch", id, token, undefined, name)) {
             if (await validateToken(id as number, token as string) === true) {
                 try {
                     const flag = await fetchFlag(id, name);
@@ -70,7 +72,7 @@ const handler = async function handler(
                 res.status(400).json({ code: 401, status: 'Unauthorized' })
             }
         }
+    } else {
+        res.status(400).json({ code: 400, status: 'Bad Request' })
     }
 }
-
-export default withSentry(handler)

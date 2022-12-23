@@ -45,8 +45,8 @@ const handler = async function handler(
         } else {
             res.status(400).json({ code: 401, status: 'Unauthorized' })
         }
-    } else {
-        if (id && token && validateInputLogTypes('fetch', id, token, undefined, undefined, undefined, undefined)) {
+    } else if (id && token) {
+        if (validateInputLogTypes('fetch', id, token, undefined, undefined, undefined, undefined)) {
             if (await validateToken(id as number, token as string) === true) {
                 try {
                     const logs = await fetchLogs(id);
@@ -59,6 +59,8 @@ const handler = async function handler(
                 res.status(400).json({ code: 401, status: 'Unauthorized' })
             }
         }
+    } else {
+        res.status(400).json({ code: 400, status: 'Bad Request' })
     }
 }
 

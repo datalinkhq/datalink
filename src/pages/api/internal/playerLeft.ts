@@ -45,6 +45,8 @@ const handler = async function handler(
         } else {
             res.status(401).json({ code: 401, status: 'Unauthorized' })
         }
+    } else {
+        res.status(400).json({ code: 400, status: 'Bad Request' })
     }
 }
 
