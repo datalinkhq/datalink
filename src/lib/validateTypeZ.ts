@@ -183,7 +183,7 @@ function validateEventTypes(endpoint: 'publish' | 'update', id: any, token: any,
                 Packet: z.object({
                     EventID: z.string(),
                     EventName: z.string(),
-                    PurchaseID: z.bigint()
+                    PurchaseID: z.bigint().nullable()
                 })
             })
 
