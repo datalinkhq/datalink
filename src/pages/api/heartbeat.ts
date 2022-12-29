@@ -23,12 +23,14 @@ import { Data, Heartbeat, Res } from '../../lib/types/types'
 import { withSentry } from '@sentry/nextjs';
 import { validateAuthTypes } from '../../lib/validateTypeZ';
 import { isObject } from 'lodash';
+import { generalBadRequest as badRequest } from '../../lib/handlers/response'
 
 
-const handler = async function handler(
+export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse<Heartbeat | Res>
 ) {
+    const start = new Date().getMilliseconds()
     const query = req.body;
     const { id, token } = query;
 
@@ -56,9 +58,7 @@ const handler = async function handler(
 
         }
     } else {
-        res.status(400).json({ code: 400, status: 'Bad Request' })
+        badRequest(req, res, new Date().getMilliseconds() - start)
         return;
     }
 }
-
-export default withSentry(handler)

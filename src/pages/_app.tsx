@@ -15,10 +15,12 @@
 // directory of this source tree.
 
 import "../styles/globals.css";
-import type { AppProps } from "next/app";
+import type { AppProps, NextWebVitalsMetric } from "next/app";
 import Head from "next/head";
 import Script from "next/script";
 import Navbar from "../components/Navbar";
+
+
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

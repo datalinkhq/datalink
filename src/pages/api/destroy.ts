@@ -21,11 +21,13 @@ import prisma from '../../lib/prisma'
 import { Data } from '../../lib/types/types'
 import { withSentry } from '@sentry/nextjs'
 import { validateAuthTypes } from '../../lib/validateTypeZ'
+import { generalBadRequest as badRequest } from '../../lib/handlers/response'
 
-const handler = async function handler(
+export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
+  const start = new Date().getMilliseconds()
   const query = req.body;
   const { id, token, session_key } = query;
   if (token && id && session_key && validateAuthTypes(id, token)) {
@@ -45,8 +47,6 @@ const handler = async function handler(
       res.status(401).json({ code: 401, status: `Unauthorized` })
     }
   } else {
-    res.status(400).json({ code: 400, status: 'Bad Request' })
+    badRequest(req, res, new Date().getMilliseconds() - start)
   }
 }
-
-export default withSentry(handler)
