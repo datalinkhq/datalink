@@ -15,7 +15,7 @@ function error(route: string, method: "GET"|"POST"|"PUT", message: any) {
 }
 
 function hint(route: string, message: any) {
-    console.log(`${hintStyle(c.bold("  HINT  "))} ${c.underline(routeStyle(route))} ${message}`)
+    console.log(`${hintStyle(c.bold("  HINT  "))}  ${c.underline(routeStyle(route))} ${message}`)
 }
 
 export { info, error, hint }
