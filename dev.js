@@ -23,7 +23,7 @@ nextApp.prepare().then(() => {
     }).listen(3000, (e) => {
         if (!e) {
             console.clear()
-            console.log(`${c.bgGreen(c.bold(" READY "))} Client compiled and listening to port ${c.yellow(c.bold("3000"))}.`)
+            console.log(`${c.bgGreen(c.bold(" READY "))}  Client compiled and listening to port ${c.yellow(c.bold("3000"))}.`)
             intercept((text) => {
                 if (text.includes("wait") || text.includes("info") || text.includes("event")) {
                     return ""
