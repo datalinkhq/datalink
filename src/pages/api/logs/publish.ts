@@ -36,7 +36,6 @@ export default async function handler(
     if (id && token && trace && type && message && validateInputLogTypes('publish', id, token, trace, type, message)) {
         if (await validateToken(id as number, token as string) === true) {
             if (await validate(type) === true) {
-                logger
                 try {
                     logEvent(type, trace, body, message);
                     res.status(200).json({ code: 200, status: `Success` })
