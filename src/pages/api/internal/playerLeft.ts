@@ -27,11 +27,13 @@ import fetchLogs from '../../../lib/fetchLogs'
 import { toInteger } from 'lodash'
 import addPlayer from '../../../lib/addPlayer'
 import { validatePlayerTypes } from '../../../lib/validateTypeZ'
+import { generalBadRequest as badRequest } from '../../../lib/handlers/response'
 
-const handler = async function handler(
+export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse<Player>
 ) {
+    const start = new Date().getMilliseconds()
     const body = req.body;
     const { id, token, accountId, sessionTime } = body;
     if (id && token && accountId && sessionTime && validatePlayerTypes("playerLeft", id, token, accountId, undefined, undefined, undefined, undefined, undefined, undefined, sessionTime)) {
@@ -46,8 +48,6 @@ const handler = async function handler(
             res.status(401).json({ code: 401, status: 'Unauthorized' })
         }
     } else {
-        res.status(400).json({ code: 400, status: 'Bad Request' })
+        badRequest(req, res, new Date().getMilliseconds() - start)
     }
 }
-
-export default withSentry(handler)

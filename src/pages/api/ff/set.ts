@@ -24,11 +24,13 @@ import { withSentry } from '@sentry/nextjs'
 import validate from '../../../lib/validateFloat'
 import setFlag from '../../../lib/setFlag'
 import { validateFastFlagTypes } from '../../../lib/validateTypeZ'
+import { generalBadRequest as badRequest } from '../../../lib/handlers/response'
 
-const handler = async function handler(
+export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse<Flag>
 ) {
+    const start = new Date().getMilliseconds()
     const body = req.body;
     const { id, token, flagid, name, value } = body;
     if (id && token && flagid && name && value && validateFastFlagTypes("set", id, token, flagid, name, value)) {
@@ -47,8 +49,6 @@ const handler = async function handler(
             res.status(400).json({ code: 401, status: 'Unauthorized' })
         }
     } else {
-        res.status(400).json({ code: 400, status: 'Bad Request' })
+        badRequest(req, res, new Date().getMilliseconds() - start)
     }
 }
-
-export default withSentry(handler)

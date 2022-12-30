@@ -26,12 +26,14 @@ import logEvent from '../../../lib/logEvent'
 import fetchFlag from '../../../lib/fetchFlag'
 import { toInteger } from 'lodash'
 import { validateFastFlagTypes } from '../../../lib/validateTypeZ'
+import { generalBadRequest as badRequest } from '../../../lib/handlers/response'
 
 
 export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse<Flag>
 ) {
+    const start = new Date().getMilliseconds()
     const body = req.body;
     const { flagid, id, token, name } = body;
     if (flagid && id && token) {
@@ -73,6 +75,6 @@ export default async function handler(
             }
         }
     } else {
-        res.status(400).json({ code: 400, status: 'Bad Request' })
+        badRequest(req, res, new Date().getMilliseconds() - start)
     }
 }

@@ -24,16 +24,19 @@ import { withSentry } from '@sentry/nextjs'
 import validate from '../../../lib/validateLogType'
 import logEvent from '../../../lib/logEvent'
 import { validateInputLogTypes } from '../../../lib/validateTypeZ'
+import { generalBadRequest as badRequest } from '../../../lib/handlers/response'
 
-const handler = async function handler(
+export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse<Data>
 ) {
+    const start = new Date().getMilliseconds()
     const body = req.body;
     const { id, token, trace, type, message } = body;
     if (id && token && trace && type && message && validateInputLogTypes('publish', id, token, trace, type, message)) {
         if (await validateToken(id as number, token as string) === true) {
             if (await validate(type) === true) {
+                logger
                 try {
                     logEvent(type, trace, body, message);
                     res.status(200).json({ code: 200, status: `Success` })
@@ -47,8 +50,6 @@ const handler = async function handler(
             res.status(400).json({ code: 401, status: 'Unauthorized' })
         }
     } else {
-        res.status(400).json({ code: 400, status: 'Bad Request' })
+        badRequest(req, res, new Date().getMilliseconds() - start)
     }
 }
-
-export default withSentry(handler)

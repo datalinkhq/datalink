@@ -31,7 +31,6 @@
     "lodash": "^4.17.21",
     "next": "^13.0.1",
     "prisma": "^4.5.0",
-    "react": "latest",
     "react-chartjs-2": "^4.3.1",
     "react-dom": "^18.2.0",
     "uuid": "^9.0.0",

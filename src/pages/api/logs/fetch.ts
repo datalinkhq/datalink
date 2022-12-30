@@ -27,11 +27,13 @@ import logEvent from '../../../lib/logEvent'
 import fetchLogs from '../../../lib/fetchLogs'
 import { toInteger } from 'lodash'
 import { validateInputLogTypes } from '../../../lib/validateTypeZ'
+import { generalBadRequest as badRequest } from '../../../lib/handlers/response'
 
-const handler = async function handler(
+export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse<Log>
 ) {
+    const start = new Date().getMilliseconds()
     const body = req.body;
     const { logid, id, token } = body;
     if (logid && id && token && validateInputLogTypes('fetch', id, token, undefined, undefined, undefined, logid)) {
@@ -60,8 +62,6 @@ const handler = async function handler(
             }
         }
     } else {
-        res.status(400).json({ code: 400, status: 'Bad Request' })
+        badRequest(req, res, new Date().getMilliseconds() - start)
     }
 }
-
-export default withSentry(handler)
