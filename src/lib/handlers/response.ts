@@ -32,6 +32,7 @@ function generalBadRequest(req: NextApiRequest, res: NextApiResponse<Data>, dur:
         var engine = clientDetails?.split(" ")[7].split('/')[0] || "unknown"
     } catch (e) { }
 
+    //@ts-ignore
     logger.error(req.url || "unknown", req.method as "GET" | "POST" | "PUT", `${c.magenta(c.bold("requestID"))}: ${metricsId}, ${c.cyan(c.bold("client"))}: ${engine + browser} -> ${dur}ms `)
     logger.hint(req.url || "unknown", `${c.magenta(c.bold("requestID"))}: ${metricsId}, body did not provide ${notProvided}`)
 }
