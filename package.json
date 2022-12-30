@@ -11,14 +11,14 @@
     "dev:turbo": "next dev --turbo",
     "build": "pnpm generate-schema && next build",
     "build:turbo": "pnpm generate-schema && next build --turbo",
-    "generate-schema:proxy": "prisma generate --data-proxy",
-    "generate-schema": "prisma generate",
-    "push-schema": "prisma db push",
+    "schema:proxy-generate": "prisma generate --data-proxy",
+    "schema:generate": "prisma generate",
+    "schema:push": "prisma db push",
     "start": "next start",
     "lint": "next lint",
     "export": "next export",
     "export:turbo": "next export --turbo",
-    "vercel-build": "pnpm build && ./vercel.sh"
+    "build:vercel": "pnpm build && ./vercel.sh"
   },
   "dependencies": {
     "@prisma/client": "^4.5.0",
