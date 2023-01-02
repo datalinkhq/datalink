@@ -17,6 +17,12 @@
 
 import { z } from 'zod';
 
+/**
+ * Validates authentication API request bodies.
+ * @param {any} id - ID provided in the body.
+ * @param {any} token - Token provided in the body.
+ * @returns {boolean} 
+ */
 function validateAuthTypes(id: any, token: any): boolean {
     try {
         const validator = z.object({
@@ -33,6 +39,12 @@ function validateAuthTypes(id: any, token: any): boolean {
 
 }
 
+/**
+ * Validates account creation API request bodies.
+ * @param {any} name - Username provided in the body.
+ * @param {any} password - Authentication callback token provided in the body.
+ * @returns {boolean} 
+ */
 function validateCreationTypes(name: any, password: any) {
     try {
         const validator = z.object({
@@ -47,6 +59,17 @@ function validateCreationTypes(name: any, password: any) {
     }
 }
 
+/**
+ * Validates log API request bodies.
+ * @param {"publish"  | "fetch"} endpoint - Type of API endpoint.
+ * @param {any} id - ID provided in the body.
+ * @param {any} token - Token provided in the body.
+ * @param {any} trace - Log trace provided in the body.
+ * @param {any} type - Log type provided in the body. This is first handled by validateLogType. (Optional)
+ * @param {any} message - Log message provided in the body. (Optional)
+ * @param {any} logid - LogID provided in the body. (Optional)
+ * @returns {boolean}
+ */
 function validateInputLogTypes(endpoint: "publish" | "fetch", id: any, token: any, trace?: any, type?: any, message?: any, logid?: any): boolean | undefined {
     try {
         if (endpoint == 'publish') {
@@ -81,6 +104,21 @@ function validateInputLogTypes(endpoint: "publish" | "fetch", id: any, token: an
     }
 }
 
+/**
+ * Validates player API request bodies.
+ * @param {"playerJoined"  | "playerLeft"} endpoint - Type of API endpoint.
+ * @param {any} id - ID provided in the body.
+ * @param {any} token - Token provided in the body.
+ * @param {any} accountId - Pseudo accountID provided in the body.
+ * @param {any} accountAge - Account age provided in the body. (Optional)
+ * @param {any} followedPlayer - Boolean on whether the player joined another player; provided in the body. (Optional)
+ * @param {any} followedFriend - Boolean on whether the player joined a friend; provided in the body. (Optional)
+ * @param {any} followedPlayer - Boolean on whether the player's account is a premium account; provided in the body. (Optional)
+ * @param {any} locale - Locale of the player provided in the body. (Optional)
+ * @param {any} region - Region of the player provided in the body. (Optional)
+ * @param {any} sessionTime - Time of the play session provided in the body. (Optional)
+ * @returns {boolean}
+ */
 function validatePlayerTypes(endpoint: "playerJoined" | "playerLeft", id: any, token: any, accountId: any, accountAge?: any, followedPlayer?: any, followedFriend?: any, premium?: any, locale?: any, region?: any, sessionTime?: any): boolean | undefined {
     try {
         if (endpoint == 'playerJoined') {
@@ -122,7 +160,17 @@ function validatePlayerTypes(endpoint: "playerJoined" | "playerLeft", id: any, t
     }
 }
 
-function validateFastFlagTypes(endpoint: "fetch" | "set" | "update", id?: any, token?: any, flagid?: any, name?: any, value?: any): boolean | undefined {
+/**
+ * Validates fast flag API request bodies.
+ * @param {"fetch"  | "set" | "update"} endpoint - Type of API endpoint.
+ * @param {any} id - ID provided in the body.
+ * @param {any} token - Token provided in the body.
+ * @param {any} flagid - FlagID provided in the body. (Optional)
+ * @param {any} name - Name of the flag provided in the body. (Optional)
+ * @param {any} value - Value of the flag provided in the body. (Optional)
+ * @returns {boolean}
+ */
+function validateFastFlagTypes(endpoint: "fetch" | "set" | "update", id: any, token: any, flagid?: any, name?: any, value?: any): boolean | undefined {
     try {
         if (endpoint == 'fetch') {
             const validator = z.object({
@@ -170,7 +218,18 @@ function validateFastFlagTypes(endpoint: "fetch" | "set" | "update", id?: any, t
     }
 }
 
-function validateEventTypes(endpoint: 'publish' | 'update', id: any, token: any, DateISO: any, ServerID: any, Packet: {}, PlaceID: any): boolean | undefined {
+/**
+ * Validates event API request bodies.
+ * @param {"publish"  | "update"} endpoint - Type of API endpoint.
+ * @param {any} id - ID provided in the body.
+ * @param {any} token - Token provided in the body.
+ * @param {any} DateISO - DateISO provided in the body. 
+ * @param {any} ServerID - ID of the server provided in the body. 
+ * @param {any} Packet - Payload packet provided in the body. 
+ * @param {any} Packet - PlaceID provided in the body. 
+ * @returns {boolean}
+ */
+function validateEventTypes(endpoint: 'publish' | 'update', id: any, token: any, DateISO: any, ServerID: any, Packet: any, PlaceID: any): boolean | undefined {
     try {
 
         if (endpoint == 'update' || endpoint == 'publish') {
@@ -200,6 +259,14 @@ function validateEventTypes(endpoint: 'publish' | 'update', id: any, token: any,
     }
 }
 
+/**
+ * Validates event API request bodies.
+ * @param {"create"  | "exists" | "retrieve"} endpoint - Type of API endpoint.
+ * @param {any} id - ID provided in the body.
+ * @param {any} token - Token provided in the body.
+ * @param {any} branchName - Name of the branch provided in the body. 
+ * @returns {boolean}
+ */
 function validateBranchTypes(endpoint: 'create' | 'exists' | 'retrieve', id: any, token: any, branchName: any) {
     try {
         if (endpoint == 'create') {
