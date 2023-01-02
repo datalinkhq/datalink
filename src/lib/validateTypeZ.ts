@@ -200,11 +200,29 @@ function validateEventTypes(endpoint: 'publish' | 'update', id: any, token: any,
     }
 }
 
+function validateBranchTypes(endpoint: 'create' | 'exists' | 'retrieve', id: any, token: any, branchName: any) {
+    try {
+        if (endpoint == 'create') {
+            const validator = z.object({
+                id: z.number(),
+                token: z.string(),
+                branchName: z.string()
+            })
+
+            validator.parse({ id: id, token: token, branchName: branchName })
+            return true
+        }
+    } catch(e) {
+        return false
+    }
+}
+
 export {
     validateAuthTypes,
     validateCreationTypes,
     validateInputLogTypes,
     validatePlayerTypes,
     validateFastFlagTypes,
-    validateEventTypes
+    validateEventTypes,
+    validateBranchTypes
 }

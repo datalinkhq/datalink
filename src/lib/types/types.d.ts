@@ -54,3 +54,7 @@ export type Flag = {
 export type Heartbeat = Res & {
     expiringSoon: Boolean
 }
+
+export type Branch = Res & {
+    BranchID?: number
+}
