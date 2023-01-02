@@ -15,8 +15,11 @@
 // directory of this source tree.
 
 
+// This library has been deprecated as we now use ZOD. All the following functions have been marked as deprecated. 
 
-// NOTE: THIS IS AS WE NOW USE ZOD!
+/**
+ * @deprecated
+ */
 function validateAuthTypes(id: any, token: any): boolean {
     if (typeof id === 'number' && typeof token === 'string') {
         return true
@@ -25,6 +28,9 @@ function validateAuthTypes(id: any, token: any): boolean {
     }
 }
 
+/**
+ * @deprecated
+ */
 function validateCreationTypes(name: any, password: any): boolean {
     if (typeof name === 'string' && typeof password === 'string') {
         return true
@@ -33,6 +39,9 @@ function validateCreationTypes(name: any, password: any): boolean {
     }
 }
 
+/**
+ * @deprecated
+ */
 function validateInputLogTypes(endpoint: string, id: any, token: any, trace?: any, type?: any, message?: any, logid?: any): boolean | Error | undefined {
     if (endpoint == 'publish') {
         if (typeof id === 'number' && typeof token === 'string' && typeof trace === 'string' && typeof type === 'string' && typeof message === 'string') {
