@@ -18,7 +18,9 @@
     "lint": "next lint",
     "export": "next export",
     "export:turbo": "next export --turbo",
-    "build:vercel": "pnpm build && ./vercel.sh"
+    "build:vercel": "pnpm build && ./vercel.sh",
+    "build:bootstrap": "ncc build bin/bootstrapper.ts -o bin/datalink-server -d",
+    "compile:bootstrap": "tsc bin/bootstrapper.ts --noEmit & pkg ./bin/bootstrapper.js -o datalink-server -d -t node18-linux-x64 && mv datalink-server bin/"
   },
   "dependencies": {
     "@prisma/client": "^4.8.0",
@@ -52,6 +54,7 @@
     "eslint-config-next": "13.0.1",
     "extract-zip": "^2.0.1",
     "npm-check-updates": "16.3.18",
+    "pkg": "^5.8.0",
     "prisma": "^4.8.0",
     "react": "18.2.0",
     "stream-file": "^0.3.0",

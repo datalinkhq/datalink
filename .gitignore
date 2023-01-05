@@ -36,6 +36,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 
+# compiled outputs
+bin/datalink-server
+bin/bootstrapper.js
+
 # Sentry
 .sentryclirc
 

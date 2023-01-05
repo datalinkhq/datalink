@@ -68,7 +68,7 @@ function setup() {
 
             await extract(archive, { dir: installDir })
 
-            writeFile(path.join(__dirname, "installation.json"), `{ \"location\": \"${installDir}\" }`, (e) => {
+            writeFile(path.join(process.cwd(), "installation.json"), `{ \"location\": \"${installDir}\" }`, (e) => {
                 if (e) {
                     internalError("Failed to write installation details. Aborting.")
                 }
@@ -77,7 +77,7 @@ function setup() {
             run(installDir)
         } else {
             // Exists, just run already!
-            const installDir = readFile(path.join(__dirname, "installation.json"), (e, data) => {
+            const installDir = readFile(path.join(process.cwd(), "installation.json"), (e, data) => {
                 if (e) {
                     internalError("Cannot read installation details. Reinstalling may fix this.")
                 } else {
