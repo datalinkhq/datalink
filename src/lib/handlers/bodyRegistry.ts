@@ -12,7 +12,10 @@ const registry: { [endpoint: string]: string[] } = {
     "/api/internal/playerLeft": [ "id", "token", "accountId", "sessionTime" ],
     "/api/ff/set": [ "id", "token", "name", "value" ],
     "/api/ff/fetch": [ "id", "token" ] || [ "id", "token", "flagid" ] || [ "id", "token", "name" ],
-    "/api/ff/update": [ "id", "token", "flagid", "name", "value" ]
+    "/api/ff/update": [ "id", "token", "flagid", "name", "value" ],
+    "/api/branch/create": [ "id", "token", "branchName" ],
+    "/api/id": [ "username" ],
+    "/api/exists": [ "username" ]
 }
 
 export default registry
