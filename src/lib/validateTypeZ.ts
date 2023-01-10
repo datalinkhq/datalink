@@ -279,7 +279,18 @@ function validateBranchTypes(endpoint: 'create' | 'exists' | 'retrieve', id: any
             validator.parse({ id: id, token: token, branchName: branchName })
             return true
         }
-    } catch(e) {
+    } catch (e) {
+        return false
+    }
+}
+
+function validateIdTypes(username: any) {
+    try {
+        const validator = z.string()
+
+        validator.parse(username)
+        return true
+    } catch (e) {
         return false
     }
 }
@@ -291,5 +302,6 @@ export {
     validatePlayerTypes,
     validateFastFlagTypes,
     validateEventTypes,
-    validateBranchTypes
+    validateBranchTypes, 
+    validateIdTypes
 }

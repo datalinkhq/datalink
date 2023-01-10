@@ -58,3 +58,11 @@ export type Heartbeat = Res & {
 export type Branch = Res & {
     BranchID?: number
 }
+
+export type IdResponse = Res & {
+    id?: number | null
+}
+
+export type ExistsReponse = Res & {
+    exists?: boolean | null
+}

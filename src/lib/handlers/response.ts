@@ -7,7 +7,7 @@ import { randomUUID } from "crypto"
 import { userAgent } from "next/server"
 import bodyRegistry from "./bodyRegistry"
 
-function generalBadRequest(req: NextApiRequest, res: NextApiResponse<Data>, dur: number) {
+function generalBadRequest(req: NextApiRequest, res: NextApiResponse, dur: number) {
     const metricsId = `request_${randomUUID()}`
     if (!req.url) return;
 
