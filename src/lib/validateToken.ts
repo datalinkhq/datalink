@@ -18,6 +18,7 @@ import { validate as uuidValidate } from 'uuid';
 import fetchtoken from './fetchToken'
 import jwt from 'jsonwebtoken'
 import { env } from 'process'
+import prisma from './prisma';
 
 
 /**
