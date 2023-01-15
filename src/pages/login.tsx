@@ -78,7 +78,8 @@ const Login: NextPageWithLayout = () => {
             />
             <div className="mb-6">
               <h1 className="text-black font-bold text-[40px] leading-[48px] dark:text-white">
-                👋 Welcome back!
+                <div className="inline-block animate-wave">👋</div> Welcome
+                back!
               </h1>
               <p className="text-black font-normal text-xl leading-[24px] opacity-75 dark:text-white">
                 Sign in
