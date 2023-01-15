@@ -9,8 +9,10 @@ import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 const Login: NextPageWithLayout = () => {
+  const router = useRouter();
   const { systemTheme, theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -65,6 +67,8 @@ const Login: NextPageWithLayout = () => {
               fixedWidth
               size="2xl"
               className="text-black dark:text-white group-hover:text-gray-800 dark:group-hover:text-slate-200 transition-colors"
+              onClick={() => router.back()}
+              role="button"
             />
           </div>
           <div className="w-[475px]">
