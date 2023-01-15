@@ -34,7 +34,7 @@ module.exports = {
         },
       },
       animation: {
-        wave: "wave 3.5s infinite",
+        wave: "wave 3.5s",
       },
     },
   },
