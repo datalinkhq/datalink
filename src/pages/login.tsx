@@ -57,7 +57,7 @@ const Login: NextPageWithLayout = () => {
 
       <div className="h-screen flex">
         <motion.div
-          className="relative bg-primary-white dark:bg-primary rounded-xl px-[92px] py-[104px] m-auto z-50 scale-95"
+          className="flex md:flex-none relative bg-primary-white dark:bg-primary rounded-none md:rounded-xl w-full min-h-screen md:w-fit md:h-fit md:min-h-fit px-16 md:px-[92px] py-[104px] m-auto z-50 scale-95"
           initial={{ opacity: 0, y: -100 }}
           animate={{ opacity: 1, y: 0 }}
         >
@@ -71,7 +71,7 @@ const Login: NextPageWithLayout = () => {
               role="button"
             />
           </div>
-          <div className="w-[475px]">
+          <div className="w-full md:w-[475px] m-auto">
             <Image
               alt="logo"
               className="bg-transparent mx-auto mb-[12px]"
