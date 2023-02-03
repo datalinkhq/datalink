@@ -4,19 +4,12 @@ import intercept from "intercept-stdout"
 import { createServer, IncomingMessage, ServerResponse } from 'http'
 import { get } from 'https'
 import { parse } from 'url'
-import { createWriteStream, mkdir, mkdirSync, PathLike, readFileSync, statSync, unlinkSync, writeFileSync } from 'fs'
+import { createWriteStream, mkdirSync, PathLike, readFileSync, statSync, unlinkSync, writeFileSync } from 'fs'
 import { tmpdir } from 'os'
 import path from 'path'
-import download from 'download'
+// import extract from 'extract-zip'
+import StreamZip from 'node-stream-zip'
 import { createHash } from 'crypto'
-import { exec, spawn, spawnSync } from 'child_process'
-
-// FOR INSTALLATION SCRIPT:
-// First we need to import the required GPG keys from https://id.devcomp.xyz,
-// Then we need to make git trust the temporary directory: git config --global 
-// --add safe.directory $DEST.
-// Finally, we can download and run the bootstrapper code
-
 
 function invalidOptionError(opt: string): never {
     console.log(`${c.bgRed(c.bold("  ERROR "))}  Failed to initialize client: invalid option provided for ${c.yellow(c.bold(opt))}.`)
@@ -25,11 +18,8 @@ function invalidOptionError(opt: string): never {
 
 function internalError(err: string): never {
     console.log(`${c.bgRed(c.bold("  ERROR "))}  ${err}`)
-    try {
-        unlinkSync("/etc/datalink");
-        unlinkSync("/tmp/datalink")
-    } catch (e) {
-        console.log(`${c.bgRed(c.bold("  ERROR "))}  Cannot remove failed install. Please remove /etc/datalink and /tmp/datalink manually.`)
+    try { unlinkSync("/etc/datalink") } catch (e) {
+        console.log(`${c.bgRed(c.bold("  ERROR "))}  Cannot remove failed install. Please remove /etc/datalink manually.`)
     }
     process.exit(1)
 }
@@ -41,7 +31,7 @@ function info(str: string) {
 let port: string | undefined = process.env.DATALINK_PORT
 let hostname = process.env.DATALINK_SERVER_DOMAIN
 
-async function setup() {
+function setup() {
     info("Initializing setup for node18-linux-x64...")
     if (!port) invalidOptionError("PORT")
     if (!hostname) invalidOptionError("HOSTNAME")
@@ -60,8 +50,8 @@ async function setup() {
         }
     } catch (e) {
         // No existing installation
-        // if something breaks: blame this
-        const dest = path.join(tmpdir(), "datalink-server-linux-x86_64")
+        const dest = path.join(tmpdir(), "datalink")
+        const archive = path.join(dest, "datalink-server-linux-x86_64.zip")
 
         try {
             mkdirSync(dest)
@@ -69,39 +59,47 @@ async function setup() {
             internalError("Failed to create temporary directory for installation.");
         }
 
-
+        let stream = createWriteStream(archive)
         try {
-            const req: { sha: string, commit: { verification: { signature: string } } } = await fetch("https://api.github.com/repos/datalinkhq/datalink/commits/main").then((r) => r.json())
-
-            const commitHash = req.sha
-            var archiveHash = createHash('sha256').update(commitHash).digest('hex')
-            var installDir = `/etc/datalink/${archiveHash}`
             info("Downloading latest server source...")
-
-            mkdirSync("/etc/datalink")
-            mkdirSync(installDir)
-
-            exec(`git clone https://github.com/datalinkhq/datalink.git ${dest}`).on('error', (_) => internalError("Failed to clone datalink source. Please try again."))
-            process.chdir(dest)
-            const gpgVerification = spawn(`git verify-commit -v --raw HEAD`)// .on('error', (e: any) => console.log(e) + internalError("GPG verification failed. Source may have been tampered with. Aborting."))
-
-            gpgVerification.stdout.on('data', (out: string) => {
-                info(`${c.bold(c.blue("[GPG]"))} ${out.trim().split("[GNUPG:]")[0]}`)
+            get("https://github.com/datalinkhq/datalink/archive/refs/heads/main.zip", (res) => {
+                res.pipe(stream)
+                stream.on('finish', () => {
+                    stream.close((e) => {
+                        if (e) {
+                            internalError("Failed to close installation stream. Please try again.")
+                        }
+                    })
+                })
             })
-
-            gpgVerification.stderr.on('data', (err: string) => {
-                console.log(err)
-            })
-
-
-
-            writeFileSync(path.join(installDir, "signature.gpg"), req.commit.verification.signature)
         } catch (e) {
-            console.log(e)
             internalError("Failed to pull datalink source. Please try again.")
         }
 
+        const archiveInstance = readFileSync(archive)
+        const archiveHash = createHash('sha256').update(archiveInstance).digest('hex')
+        const installDir = `/etc/datalink/${archiveHash}`
+        try { mkdirSync(installDir) } catch (e) {
+            internalError("Failed to create server installation directory. Aborting.")
+        }
 
+        // await extract(archive, { dir: installDir })
+
+        const archiveStream = new StreamZip({ file: archive })
+
+        archiveStream.on('error', (e) => e ? internalError("Failed to unarchive server contents.") : info("Unarchiving server source..."))
+
+        archiveStream.on('ready', () => {
+            archiveStream.extract(null, installDir, (e, count) => {
+                if (e) {
+                    internalError("Failed to unarchive server contents.")
+                } else {
+                    info(`Unarchived server contents (${count} files).`)
+                }
+
+                archiveStream.close()
+            })
+        })
         try {
             writeFileSync(path.join(process.cwd(), "installation.json"), `{ \"location\": \"${installDir}\" }`)
         } catch (e) {
