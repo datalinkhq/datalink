@@ -1,0 +1,100 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Next.JS: Build Project",
+			"detail": "Build the web API and frontend",
+			"type": "shell",
+			"command": "pnpm build",
+			"group": { "kind": "build" },
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"presentation": {
+				"reveal": "always",
+				"panel": "new",
+				"focus": true,
+				"close": true,
+			}
+		},
+		{
+			"label": "Next.JS: Launch development server",
+			"detail": "Start a development server on standard port 3000",
+			"type": "shell",
+			"command": "pnpm dev",
+			"group": { "kind": "none" },
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"presentation": {
+				"reveal": "always",
+				"panel": "new",
+				"focus": true
+			}
+		},
+		{
+			"label": "Next.JS: Generate static build outputs",
+			"detail": "Generate static server-hostable files",
+			"type": "shell",
+			"command": "pnpm export",
+			"group": { "kind": "build" },
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"presentation": {
+				"reveal": "always",
+				"panel": "new",
+				"focus": true,
+				"close": false,
+			}
+		},
+        {
+			"label": "Next.JS: Lint project",
+			"detail": "Lint the source code using the custom ESLint configuration",
+			"type": "shell",
+			"command": "pnpm lint",
+			"group": { "kind": "build" },
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"presentation": {
+				"reveal": "always",
+				"panel": "new",
+				"focus": true,
+				"close": false,
+			}
+		},
+		{
+			"label": "PNPM: View available package updates",
+			"detail": "Scan the project's dependencies for available updates",
+			"type": "shell",
+			"command": "pnpm run update",
+			"group": { "kind": "build" },
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"presentation": {
+				"reveal": "always",
+				"panel": "new",
+				"focus": true,
+				"close": true
+			}
+		},
+        {
+			"label": "PNPM: Upgrade packages",
+			"detail": "Update the project's dependencies",
+			"type": "shell",
+			"command": "pnpm run upgrade && pnpm i",
+			"group": { "kind": "build" },
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"presentation": {
+				"reveal": "always",
+				"panel": "new",
+				"focus": true,
+				"close": true
+			}
+		}
+	]
+}
