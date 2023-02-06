@@ -19,36 +19,29 @@ import fetchtoken from '../../lib/fetchToken'
 import { v4 as uuidv4 } from 'uuid';
 import validateToken from '../../lib/validateToken'
 import prisma from '../../lib/prisma'
-import { IdResponse } from '../../lib/types/types'
+import { SignResponse } from '../../lib/types/types'
 import { withSentry } from '@sentry/nextjs';
 import jwt from 'jsonwebtoken'
 import { env } from 'process'
-import { validateIdTypes } from '../../lib/validateTypeZ';
 import { generalBadRequest as badRequest } from '../../lib/handlers/response';
 
 export default async function handler(
     req: NextApiRequest,
-    res: NextApiResponse<IdResponse>
+    res: NextApiResponse<SignResponse>
 ) {
     const start = new Date().getMilliseconds()
     const query = req.body;
-    const { username } = query;
-    if (username && validateIdTypes(username)) {
+    const { payload } = query;
+    if (payload && typeof payload === "string") {
         try {
-            const user = await prisma.user.findUnique({
-                where: {
-                    name: username as string
-                }
-            })
-
-            if (user) {
-                res.status(200).json({ code: 200, status: `Success`, id: user.id })
-            } else {
-                throw new Error("No such user found!")
-            }
-
+            if (!process.env.SECRET) throw new Error("no secret")
+            
+            var signedToken = jwt.sign(payload, process.env.SECRET)
+            res.status(200).json({ code: 200, status: `Success`, signedToken: signedToken })
+            return;
         } catch (e) {
-            res.status(500).json({ code: 500, status: `Error`, id: null })
+            res.status(500).json({ code: 500, status: `Error`, signedToken: null })
+            return;
         }
     } else {
         badRequest(req, res, new Date().getMilliseconds() - start)

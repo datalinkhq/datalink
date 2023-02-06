@@ -66,3 +66,7 @@ export type IdResponse = Res & {
 export type ExistsReponse = Res & {
     exists?: boolean | null
 }
+
+export type SignResponse = Res & {
+    signedToken?: string | null
+}
