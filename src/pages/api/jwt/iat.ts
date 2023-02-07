@@ -1,4 +1,4 @@
- // $$$$$$$\             $$\               $$\ $$\           $$\       
+// $$$$$$$\             $$\               $$\ $$\           $$\       
 // $$  __$$\            $$ |              $$ |\__|          $$ |      
 // $$ |  $$ | $$$$$$\ $$$$$$\    $$$$$$\  $$ |$$\ $$$$$$$\  $$ |  $$\ 
 // $$ |  $$ | \____$$\\_$$  _|   \____$$\ $$ |$$ |$$  __$$\ $$ | $$  |
@@ -15,37 +15,36 @@
 // directory of this source tree.
 
 import type { NextApiRequest, NextApiResponse } from 'next'
-import fetchtoken from '../../lib/fetchToken'
+import fetchtoken from '../../../lib/fetchToken'
 import { v4 as uuidv4 } from 'uuid';
-import validateToken from '../../lib/validateToken'
-import prisma from '../../lib/prisma'
-import { ExistsReponse } from '../../lib/types/types'
-import { validateIdTypes } from '../../lib/validateTypeZ';
-import { generalBadRequest as badRequest } from '../../lib/handlers/response';
+import validateToken from '../../../lib/validateToken'
+import prisma from '../../../lib/prisma'
+import { IssuedAtResponse } from '../../../lib/types/types'
+import { withSentry } from '@sentry/nextjs';
+import jwt from 'jsonwebtoken'
+import { env } from 'process'
+import { generalBadRequest as badRequest } from '../../../lib/handlers/response';
 
 export default async function handler(
     req: NextApiRequest,
-    res: NextApiResponse<ExistsReponse>
+    res: NextApiResponse<IssuedAtResponse>
 ) {
     const start = new Date().getMilliseconds()
     const query = req.body;
-    const { username } = query;
-    if (username && validateIdTypes(username)) {
-        try {
+    const { id } = query;
+    if (id && typeof id === "number") {
+        try {            
             const user = await prisma.user.findUnique({
                 where: {
-                    name: username as string
+                    id: id as number
                 }
             })
 
-            if (user) {
-                res.status(200).json({ code: 200, status: `Success`, exists: true })
-            } else {
-                res.status(200).json({ code: 200, status: `Success`, exists: false })
-            }
-
+            res.status(200).json({ code: 200, status: `Success`, iat: user?.createdAt })
+            return;
         } catch (e) {
-            res.status(500).json({ code: 200, status: `Error`, exists: null })
+            res.status(500).json({ code: 500, status: `Error`, iat: null })
+            return;
         }
     } else {
         badRequest(req, res, new Date().getMilliseconds() - start)

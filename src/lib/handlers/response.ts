@@ -37,4 +37,35 @@ function generalBadRequest(req: NextApiRequest, res: NextApiResponse, dur: numbe
     logger.hint(req.url || "unknown", `${c.magenta(c.bold("requestID"))}: ${metricsId}, body did not provide ${notProvided}`)
 }
 
-export { generalBadRequest }
+function specificBadRequest(req: NextApiRequest, res: NextApiResponse, dur: number, extraFields: any, customMetricsId?: string) {
+    const metricsId = customMetricsId || `request_${randomUUID()}`
+    if (!req.url) return;
+
+    const endpointBodyExpected: string[] = bodyRegistry[req.url]
+
+    let matches: string[] = []
+
+    endpointBodyExpected.forEach((v) => {
+        for (let k in req.body) {
+            if (k == v) {
+                matches[matches.length + 1] = k
+            }
+        }
+    })
+
+    const notProvided = endpointBodyExpected.filter(i => !matches.includes(i)).toString().replaceAll(',', ', ')
+
+    res.status(400).json({...{ code: 400, status: 'Bad Request' }, ...extraFields})
+
+    try {
+        const clientDetails = req.headers["user-agent"]
+        var browser = clientDetails?.split(" ")[8].split('/')[0] || "unknown"
+        var engine = clientDetails?.split(" ")[7].split('/')[0] || "unknown"
+    } catch (e) { }
+
+    //@ts-ignore
+    logger.error(req.url || "unknown", req.method as "GET" | "POST" | "PUT", `${c.magenta(c.bold("requestID"))}: ${metricsId}, ${c.cyan(c.bold("client"))}: ${engine + browser} -> ${dur}ms `)
+    logger.hint(req.url || "unknown", `${c.magenta(c.bold("requestID"))}: ${metricsId}, body did not provide ${notProvided}`)
+}
+
+export { generalBadRequest, specificBadRequest }

@@ -22,14 +22,16 @@ import prisma from '../../lib/prisma'
 import { Data, Heartbeat, Res } from '../../lib/types/types'
 import { withSentry } from '@sentry/nextjs';
 import { validateAuthTypes } from '../../lib/validateTypeZ';
-import { isObject } from 'lodash';
-import { generalBadRequest as badRequest } from '../../lib/handlers/response'
+import { isObject, shuffle } from 'lodash';
+import { generalBadRequest as badRequest, specificBadRequest } from '../../lib/handlers/response'
+import { randomUUID } from 'crypto';
 
 
 export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse<Heartbeat | Res>
 ) {
+    const requestId = `request_${randomUUID()}`
     const start = new Date().getMilliseconds()
     const query = req.body;
     const { id, token } = query;
@@ -58,7 +60,16 @@ export default async function handler(
 
         }
     } else {
-        badRequest(req, res, new Date().getMilliseconds() - start)
+        const codeName = shuffle(["echo", "delta", "foxtrot", "lady", "mayday", "zeta", "omega"]).filter((_, i) => i < 4)
+        const nodeIdentifier = codeName.toString().replaceAll(",", "-") 
+        specificBadRequest(req, res, new Date().getMilliseconds() - start, {
+            host: process.env.NODE_ENV == "production" ? "prod" : "dev",
+            identifier: process.env.IDENTIFIER || nodeIdentifier,
+            requestId: requestId,
+            cluster: process.env.CLUSTER_ID || null,
+            health: "OK",
+            commitVersion: process.env.COMMIT_HASH || "unknown"
+        }, requestId)
         return;
     }
 }
