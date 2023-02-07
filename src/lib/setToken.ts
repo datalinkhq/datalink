@@ -6,7 +6,7 @@
 // $$ |  $$ |$$  __$$ | $$ |$$\ $$  __$$ |$$ |$$ |$$ |  $$ |$$  _$$<  
 // $$$$$$$  |\$$$$$$$ | \$$$$  |\$$$$$$$ |$$ |$$ |$$ |  $$ |$$ | \$$\ 
 // \_______/  \_______|  \____/  \_______|\__|\__|\__|  \__|\__|  \__|     
-                 
+
 // Copyright (c) 2022 Datalink Contributors. All rights reserved.  
 
 // This source code is licensed under the AGPL license.
@@ -27,21 +27,26 @@ import { env } from 'process';
  */
 async function give(name: string, data: string) {
     // let token: string = uuidv4(); // generate token
-    let token: string = jwt.sign({ data: data }, `${env.SECRET}`);
     try {
+        let token: string = jwt.sign({ data: data }, `${env.SECRET}`);
+        const decoded = jwt.verify(token, `${env.SECRET}`)
 
-        await prisma.user.create({
-            data: {
-                token: token,
-                name: name,
-            }
-        })
+        if (typeof decoded === "object") {
+            const issuedAt = decoded.iat
 
-        console.log(`Created user: ${name} with token: ${token}.`)
-        return token
+            await prisma.user.create({
+                data: {
+                    token: token,
+                    name: name,
+                    createdAt: issuedAt as number
+                }
+            })
+
+            console.log(`Created user: ${name} with token: ${token}.`)
+            return token
+        }
 
     } catch (e) {
-
         console.log(e)
         return 'Error occurred while creating user.'
     }

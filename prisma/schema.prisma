@@ -24,12 +24,12 @@ generator client {
 }
 
 model User {
-  id          Int      @id @default(autoincrement())
-  sessionKey  String?  @unique @db.VarChar(512)
-  sessionTime String?  @db.VarChar(255)
-  token       String   @unique @db.VarChar(512)
-  createdAt   DateTime @default(now())
-  name        String   @unique @db.VarChar(20)
+  id          Int     @id @default(autoincrement())
+  sessionKey  String? @unique @db.VarChar(512)
+  sessionTime String? @db.VarChar(255)
+  token       String  @unique @db.VarChar(512)
+  createdAt   Int     @db.Int
+  name        String  @unique @db.VarChar(20)
 }
 
 model Analytics {

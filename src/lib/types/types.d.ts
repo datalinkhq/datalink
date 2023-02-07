@@ -70,3 +70,7 @@ export type ExistsReponse = Res & {
 export type SignResponse = Res & {
     signedToken?: string | null
 }
+
+export type IssuedAtResponse = Res & {
+    iat?: number | null
+}
