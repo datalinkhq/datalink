@@ -3,4 +3,4 @@
     "buildCommand": "pnpm build",
     "devCommand": "pnpm dev",
     "framework": "nextjs"
-}
+} 
