@@ -6,7 +6,7 @@
 // $$ |  $$ |$$  __$$ | $$ |$$\ $$  __$$ |$$ |$$ |$$ |  $$ |$$  _$$<  
 // $$$$$$$  |\$$$$$$$ | \$$$$  |\$$$$$$$ |$$ |$$ |$$ |  $$ |$$ | \$$\ 
 // \_______/  \_______|  \____/  \_______|\__|\__|\__|  \__|\__|  \__|     
-                 
+
 // Copyright (c) 2022 Datalink Contributors. All rights reserved.  
 
 // This source code is licensed under the AGPL license.
@@ -74,3 +74,11 @@ export type SignResponse = Res & {
 export type IssuedAtResponse = Res & {
     iat?: number | null
 }
+
+type GHAccessTokenAPIResponse = {
+    access_token?: string,
+    scope?: string,
+    token_type?: string,
+}
+
+export type GHTokenResponse = Res & GHAccessTokenAPIResponse

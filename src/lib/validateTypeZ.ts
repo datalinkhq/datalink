@@ -267,7 +267,7 @@ function validateEventTypes(endpoint: 'publish' | 'update', id: any, token: any,
  * @param {any} branchName - Name of the branch provided in the body. 
  * @returns {boolean}
  */
-function validateBranchTypes(endpoint: 'create' | 'exists' | 'retrieve', id: any, token: any, branchName: any) {
+function validateBranchTypes(endpoint: 'create' | 'exists' | 'retrieve', id: any, token: any, branchName: any): boolean | undefined {
     try {
         if (endpoint == 'create') {
             const validator = z.object({
@@ -284,11 +284,27 @@ function validateBranchTypes(endpoint: 'create' | 'exists' | 'retrieve', id: any
     }
 }
 
-function validateIdTypes(username: any) {
+function validateIdTypes(username: any): boolean {
     try {
         const validator = z.string()
 
         validator.parse(username)
+        return true
+    } catch (e) {
+        return false
+    }
+}
+
+function validateGHTokenTypes(clientId: any, clientSecret: any, code: any, redirectUri: any): boolean {
+    try {
+        const validator = z.object({
+            client_id: z.string(),
+            client_secret: z.string(),
+            code: z.string(),
+            redirect_uri: z.string()
+        })
+
+        validator.parse({ client_id: clientId, client_secret: clientSecret, code: code, redirect_uri: redirectUri })
         return true
     } catch (e) {
         return false
@@ -303,5 +319,6 @@ export {
     validateFastFlagTypes,
     validateEventTypes,
     validateBranchTypes, 
-    validateIdTypes
+    validateIdTypes,
+    validateGHTokenTypes
 }
