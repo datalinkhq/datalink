@@ -34,7 +34,8 @@ export default async function handler(
 ) {
     const start = new Date().getMilliseconds()
     const query = req.body;
-    const { clientId, clientSecret, code, redirectUri } = query;
+    const { clientId, code, redirectUri } = query;
+    const clientSecret = process.env.GITHUB_CLIENT_SECRET
     if (validateGHTokenTypes(clientId, clientSecret, code, redirectUri === true)) {
         const apiUri = `https://github.com/login/oauth/access_token?client_id=${clientId}&client_secret=${clientSecret}&code=${code}&redirect_uri=${redirectUri}`
         try {
