@@ -91,6 +91,11 @@ const Login: NextPageWithLayout = () => {
         path: "/",
       });
 
+      setCookie(null, "datalink-token", signedData.signedToken, {
+        maxAge: 7 * 24 * 60 * 60,
+        path: "/",
+      });
+
       setCookie(null, "datalink-session", authData.session_key, {
         maxAge: 7 * 24 * 60 * 60,
         path: "/",
