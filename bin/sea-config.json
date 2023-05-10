@@ -1,0 +1,4 @@
+{
+  "main": "dist/bootstrapper.js",
+  "output": "dist/bootstrapper.blob"
+}
